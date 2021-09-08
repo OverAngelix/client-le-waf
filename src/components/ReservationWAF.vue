@@ -175,7 +175,7 @@ export default {
   async created() {
     let reservationsDTO = await ReservationsRepository.getReservations({
       heureReservation: this.heureSelectionne,
-      dateReservation: this.dateSelectionne + " 02:00:00.000",
+      dateReservation: this.dateSelectionne + " 00:00:00.000",
     });
     for (let i = 0; i < reservationsDTO.length; i++) {
       for (let j = 0; j < this.reservations.length; j++) {
@@ -194,7 +194,7 @@ export default {
       console.log("LOAD");
       let reservationsDTO = await ReservationsRepository.getReservations({
         heureReservation: this.heureSelectionne,
-        dateReservation: this.dateSelectionne + " 02:00:00.000",
+        dateReservation: this.dateSelectionne + " 00:00:00.000",
       });
       for (let i = 0; i < reservationsDTO.length; i++) {
         for (let j = 0; j < this.reservations.length; j++) {
