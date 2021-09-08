@@ -13,7 +13,7 @@ export default {
 
   async addReservation(reservation) {
     const response = await axios.post(
-      "https://server-le-waf.herokuapp.com//api/reservations",
+      "https://server-le-waf.herokuapp.com/api/reservations",
       reservation
     );
     return response.data;
