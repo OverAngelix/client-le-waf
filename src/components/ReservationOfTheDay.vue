@@ -258,10 +258,11 @@ export default {
   watch: {
     dateSelectionne() {
       for (let j = 0; j < this.reservations.length; j++) {
-        this.reservations[j].reserve = false;
-        this.reservations[j].valide = false;
-        this.reservations[j].nom = "";
-        this.reservations[j].nbPersonne = "";
+        this.reservations[j].nom1 = "";
+        this.reservations[j].nom2 = "";
+        this.reservations[j].nom3 = "";
+        this.reservations[j].nom4 = "";
+        this.reservations[j].nom5 = "";
       }
       this.loadReservations();
     },
