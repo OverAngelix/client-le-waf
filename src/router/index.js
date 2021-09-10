@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import ReservationClient from '../components/ReservationClient.vue'
 import ReservationWAF from '../components/ReservationWAF.vue'
 import AnnulationReservation from '../components/AnnulationReservation.vue'
-
+import ReservationOfTheDay from '../components/ReservationOfTheDay.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -30,6 +30,14 @@ const routes = [
         component: AnnulationReservation,
         meta: {
             title: 'Annulation de ma reservation',
+        }
+    },
+    {
+        path: '/ReservationDuJour',
+        name: 'ReservationOfTheDay',
+        component: ReservationOfTheDay,
+        meta: {
+            title: 'Reservation du jour',
         }
     },
 ]
