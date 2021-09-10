@@ -1,108 +1,123 @@
 <template>
   <v-dialog v-model="dialog" persistent max-width="600px">
     <template v-slot:activator="{ on, attrs }">
-      <v-btn color="primary" dark v-bind="attrs" v-on="on"> Je reserve </v-btn>
+      <v-btn class="ma-4" color="primary" dark v-bind="attrs" v-on="on">
+        Je reserve
+      </v-btn>
     </template>
     <v-card>
-      <v-card-title>
-        <span class="headline">Mes critères</span>
-      </v-card-title>
-      <v-card-text>
-        <v-container>
-          <v-row v-if="disponibilite">
-            <v-col cols="12" sm="6" md="6">
-              <v-text-field label="Nom" v-model="nom" required></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="6" md="6">
-              <v-text-field
-                label="Prenom"
-                v-model="prenom"
-                persistent-hint
-                required
-              ></v-text-field>
-            </v-col>
-            <v-col cols="6">
-              <v-text-field
-                label="Email"
-                v-model="email"
-                required
-              ></v-text-field>
-            </v-col>
-            <v-col cols="6">
-              <v-text-field
-                label="Informations complementaires"
-                v-model="informationsComplementaires"
-              ></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row v-if="preReservation">
-            <v-col cols="12" sm="6">
-              <v-select
-                :items="selectPersonne"
-                v-model="nbPersonne"
-                label="Nombre de personne"
-                outlined
-              ></v-select>
-            </v-col>
-            <v-col cols="12" sm="3">
-              <v-menu
-                ref="menu"
-                v-model="menu"
-                :close-on-content-click="false"
-                :return-value.sync="dateSelectionne"
-                transition="scale-transition"
-                offset-y
-                min-width="auto"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
-                    v-model="dateSelectionne"
-                    label="Jour"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                    outlined
-                  ></v-text-field>
-                </template>
-                <v-date-picker v-model="dateSelectionne" no-title scrollable>
-                  <v-spacer></v-spacer>
-                  <v-btn text color="primary" @click="menu = false">
-                    Annuler
-                  </v-btn>
-                  <v-btn
-                    text
-                    color="primary"
-                    @click="$refs.menu.save(dateSelectionne)"
-                  >
-                    Valider
-                  </v-btn>
-                </v-date-picker>
-              </v-menu>
-            </v-col>
-            <v-col cols="12" sm="3">
-              <v-select
-                :items="creneaux"
-                v-model="heureSelectionne"
-                label="Heure"
-                outlined
-              ></v-select>
-            </v-col>
-          </v-row>
-        </v-container>
-        <small
-          >Rappel : Il s'agit de creneaux 1h15 hormis le creneaux de 12h à
-          13h30</small
-        >
-      </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="dialog = false"
-          >Annuler</v-btn
-        >
-        <v-btn color="blue darken-1" text @click="processusReservation()"
-          >Valider</v-btn
-        >
-      </v-card-actions>
+      <v-form ref="form" v-model="valid">
+        <v-card-title>
+          <span class="headline">Mes critères</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-row v-if="disponibilite">
+              <v-col cols="12" sm="6" md="6">
+                <v-text-field
+                  label="Nom*"
+                  v-model="nom"
+                  :rules="nomRules"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6" md="6">
+                <v-text-field
+                  label="Prenom*"
+                  v-model="prenom"
+                  persistent-hint
+                  required
+                  :rules="prenomRules"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="6">
+                <v-text-field
+                  label="Email*"
+                  v-model="email"
+                  required
+                  :rules="emailRules"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="6">
+                <v-text-field
+                  label="Informations complementaires"
+                  v-model="informationsComplementaires"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row v-if="preReservation">
+              <v-col cols="12" sm="6">
+                <v-select
+                  :items="selectPersonne"
+                  v-model="nbPersonne"
+                  label="Nombre de personne*"
+                  outlined
+                  :rules="[(v) => !!v || 'champs obligatoire']"
+                  required
+                ></v-select>
+              </v-col>
+              <v-col cols="12" sm="3">
+                <v-menu
+                  ref="menu"
+                  v-model="menu"
+                  :close-on-content-click="false"
+                  :return-value.sync="dateSelectionne"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="auto"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="dateSelectionne"
+                      label="Jour"
+                      readonly
+                      v-bind="attrs"
+                      v-on="on"
+                      outlined
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker v-model="dateSelectionne" no-title scrollable>
+                    <v-spacer></v-spacer>
+                    <v-btn text color="primary" @click="menu = false">
+                      Annuler
+                    </v-btn>
+                    <v-btn
+                      text
+                      color="primary"
+                      @click="$refs.menu.save(dateSelectionne)"
+                    >
+                      Valider
+                    </v-btn>
+                  </v-date-picker>
+                </v-menu>
+              </v-col>
+              <v-col cols="12" sm="3">
+                <v-select
+                  :items="creneaux"
+                  v-model="heureSelectionne"
+                  label="Heure"
+                  outlined
+                ></v-select>
+              </v-col>
+            </v-row>
+          </v-container>
+          <small
+            >Rappel : Il s'agit de creneaux 1h15 hormis le creneaux de 12h à
+            13h30</small
+          >
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="closeModal">Annuler</v-btn>
+          <v-btn
+            color="blue darken-1"
+            :disabled="!valid"
+            text
+            @click="processusReservation()"
+            >Valider</v-btn
+          >
+        </v-card-actions>
+      </v-form>
     </v-card>
   </v-dialog>
 </template>
@@ -171,18 +186,48 @@ export default {
     )
       .toISOString()
       .substr(0, 10),
-    heureSelectionne: "16h00",
+    heureSelectionne: "12:00",
     nom: "",
     prenom: "",
     email: "",
     informationsComplementaires: "",
     idTableSelected: -1,
+
+    emailRules: [
+      (v) => !!v || "Email obligatoire",
+      (v) => /.+@.+\..+/.test(v) || "Email non valide",
+    ],
+    nomRules: [
+      (v) => !!v || "Nom obligatoire",
+      (v) =>
+        (v && v.length <= 15) || "Le nom doit faire moins de 15 caractères",
+    ],
+    prenomRules: [
+      (v) => !!v || "Prenom obligatoire",
+      (v) =>
+        (v && v.length <= 15) || "Le prenom doit faire moins de 15 caractères",
+    ],
+    valid: false,
   }),
 
   methods: {
-    reservationWaf() {
-      // this.dialog = false;
-      this.placeReservable();
+    closeModal() {
+      this.nom = "";
+      this.nbPersonne = "";
+      this.prenom = "";
+      this.idTableSelected = -1;
+      this.email = "";
+      this.informationsComplementaires = "";
+      this.dateSelectionne = new Date(
+        Date.now() - new Date().getTimezoneOffset() * 60000
+      )
+        .toISOString()
+        .substr(0, 10);
+      this.heureSelectionne = "12:00";
+      this.preReservation = true;
+      this.disponibilite = false;
+      this.resetReservationModel();
+      this.dialog = false;
     },
 
     resetReservationModel() {
@@ -210,12 +255,15 @@ export default {
             this.dateSelectionne +
             " à " +
             this.heureSelectionne +
-            " a été validé avec succès !"
+            " a été validé avec succès ! \n Un email de confirmation vous a été envoyé (pensez au spam :D)",
+          "",
+          "success"
         );
         this.dialog = false;
       } else {
         let reservationsDTO = await ReservationsRepository.getReservations({
           heureReservation: this.heureSelectionne,
+          //dateReservation: this.dateSelectionne + " 02:00:00.000",
           dateReservation: this.dateSelectionne + " 00:00:00.000",
         });
         for (let i = 0; i < reservationsDTO.length; i++) {
@@ -225,7 +273,6 @@ export default {
             }
           }
         }
-
         for (let i = 0; i < this.reservations.length; i++) {
           if (
             this.reservations[i].reserve == false &&
@@ -247,7 +294,9 @@ export default {
           this.disponibilite = false;
           this.resetReservationModel();
           this.$alert(
-            "Pas de place pour le creneau que vous desirez, veuillez recommencer avec d'autres critères"
+            "Pas de place pour le creneau que vous desirez, veuillez recommencer avec d'autres critères",
+            "",
+            "error"
           );
         }
       }

@@ -15,10 +15,15 @@
           reverse-transition="fade-transition"
           transition="fade-transition"
         >
-          <v-row class="fill-height"
-          align="center"
-          justify="center">
-            <FichePreReservation />
+          <v-row class="fill-height" align="center" justify="center">
+            <v-btn
+              class="ma-4"
+              @click="confirmationAnnulation"
+              color="primary"
+              dark
+            >
+              Confirmation de l'annulation
+            </v-btn>
           </v-row>
         </v-carousel-item>
       </v-carousel>
@@ -27,13 +32,9 @@
 </template>
 
 <script>
-import FichePreReservation from "./FichePreReservation";
+import ReservationsRepository from "@/API/ReservationsRepository";
 export default {
-  components: {
-    FichePreReservation,
-  },
-
-  name: "ReservationClient",
+  name: "AnnulationReservation",
   data: () => ({
     doggos: [
       {
@@ -50,5 +51,18 @@ export default {
       },
     ],
   }),
+
+  methods: {
+    async confirmationAnnulation() {
+      this.$alert("Votre reservation a bien été annulé", "", "success").then(
+        async () => {
+          await ReservationsRepository.deleteReservationToken(
+            this.$route.params.token
+          );
+          this.$router.push({path: '/'});
+        }
+      );
+    },
+  },
 };
 </script>
