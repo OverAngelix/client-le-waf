@@ -228,23 +228,48 @@ export default {
             switch (reservationsDTO[i].heureReservation) {
               case "12:00:00":
                 this.reservations[j].nom1 =
-                  reservationsDTO[i].nom + " " + reservationsDTO[i].prenom;
+                  reservationsDTO[i].nom +
+                  " " +
+                  reservationsDTO[i].prenom +
+                  " (" +
+                  reservationsDTO[i].nbPersonne +
+                  ")";
                 break;
               case "13:30:00":
                 this.reservations[j].nom2 =
-                  reservationsDTO[i].nom + " " + reservationsDTO[i].prenom;
+                  reservationsDTO[i].nom +
+                  " " +
+                  reservationsDTO[i].prenom +
+                  " (" +
+                  reservationsDTO[i].nbPersonne +
+                  ")";
                 break;
               case "14:45:00":
                 this.reservations[j].nom3 =
-                  reservationsDTO[i].nom + " " + reservationsDTO[i].prenom;
+                  reservationsDTO[i].nom +
+                  " " +
+                  reservationsDTO[i].prenom +
+                  " (" +
+                  reservationsDTO[i].nbPersonne +
+                  ")";
                 break;
               case "16:00:00":
                 this.reservations[j].nom4 =
-                  reservationsDTO[i].nom + " " + reservationsDTO[i].prenom;
+                  reservationsDTO[i].nom +
+                  " " +
+                  reservationsDTO[i].prenom +
+                  " (" +
+                  reservationsDTO[i].nbPersonne +
+                  ")";
                 break;
               case "17:15:00":
                 this.reservations[j].nom5 =
-                  reservationsDTO[i].nom + " " + reservationsDTO[i].prenom;
+                  reservationsDTO[i].nom +
+                  " " +
+                  reservationsDTO[i].prenom +
+                  " (" +
+                  reservationsDTO[i].nbPersonne +
+                  ")";
                 break;
               default:
                 console.log("Error sur l'heure dans la base");
