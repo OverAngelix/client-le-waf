@@ -59,11 +59,30 @@
             <div>
               {{ reservation.nomTable }}
             </div>
-            <div>12:00 {{ reservation.nom1 }}</div>
-            <div>13:30 {{ reservation.nom2 }}</div>
-            <div>14:45 {{ reservation.nom3 }}</div>
-            <div>16:00 {{ reservation.nom4 }}</div>
-            <div>17:15 {{ reservation.nom5 }}</div>
+            <strike v-if="heureCourante >= 48600"
+              >12:00 {{ reservation.nom1 }}<br
+            /></strike>
+            <div v-else>12:00 {{ reservation.nom1 }}</div>
+
+            <strike v-if="heureCourante >= 53100"
+              >13:30 {{ reservation.nom2 }}<br
+            /></strike>
+            <div v-else>13:30 {{ reservation.nom2 }}</div>
+
+            <strike v-if="heureCourante >= 57600"
+              >14:45 {{ reservation.nom3 }}<br
+            /></strike>
+            <div v-else>14:45 {{ reservation.nom3 }}</div>
+
+            <strike v-if="heureCourante >= 62100"
+              >16:00 {{ reservation.nom4 }}<br
+            /></strike>
+            <div v-else>16:00 {{ reservation.nom4 }}</div>
+
+            <strike v-if="heureCourante >= 66600"
+              >17:15 {{ reservation.nom5 }}<br
+            /></strike>
+            <div v-else>17:15 {{ reservation.nom5 }}</div>
           </v-card>
         </v-col>
       </v-row>
@@ -168,9 +187,12 @@ export default {
     )
       .toISOString()
       .substr(0, 10),
+    heureCourante: "",
   }),
 
   async created() {
+    const heure = new Date();
+    this.heureCourante = heure.getHours() * 60 * 60 + heure.getMinutes() * 60;
     if (localStorage.admin != "" && localStorage.admin !== undefined) {
       this.isConnected = true;
     }
@@ -240,7 +262,7 @@ export default {
       //console.log(process.env.VUE_APP_PASSWORD);
       if (this.password == "123") {
         this.isConnected = true;
-        localStorage.admin="TRUE";
+        localStorage.admin = "TRUE";
       } else {
         this.$alert("Mot de passe incorrect !", "", "error");
       }
