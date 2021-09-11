@@ -200,9 +200,12 @@ export default {
   }),
 
   async created() {
+    if (localStorage.admin != "" && localStorage.admin !== undefined) {
+      this.isConnected = true;
+    }
     let reservationsDTO = await ReservationsRepository.getReservations({
       heureReservation: this.heureSelectionne,
-     // dateReservation: this.dateSelectionne + " 02:00:00.000",
+      // dateReservation: this.dateSelectionne + " 02:00:00.000",
       dateReservation: this.dateSelectionne + " 00:00:00.000",
     });
     for (let i = 0; i < reservationsDTO.length; i++) {
@@ -271,6 +274,7 @@ export default {
       console.log(process.env.VUE_APP_PASSWORD);
       if (this.password == "123") {
         this.isConnected = true;
+        localStorage.admin = "TRUE";
       } else {
         this.$alert("Mot de passe incorrect !", "", "error");
       }
