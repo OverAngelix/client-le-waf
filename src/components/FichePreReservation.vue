@@ -280,7 +280,7 @@ export default {
           "La reservation au nom de " +
             this.nom +
             " le " +
-            this.dateSelectionne +
+            this.formatDate() +
             " à " +
             this.heureSelectionne +
             " a été validé avec succès ! \n Un email de confirmation vous a été envoyé (pensez au spam :D)",
