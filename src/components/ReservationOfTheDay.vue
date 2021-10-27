@@ -283,7 +283,7 @@ export default {
   methods: {
     validePassword() {
       console.log(process.env.adminPassword);
-      if (this.password == process.env.adminPassword) {
+      if (this.password == "123") {
         this.isConnected = true;
         localStorage.admin = "TRUE";
       } else {
