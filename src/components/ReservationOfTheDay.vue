@@ -59,27 +59,47 @@
             <div>
               {{ reservation.nomTable }}
             </div>
-            <strike v-if="heureCourante >= 48600"
+            <strike
+              v-if="
+                (heureCourante >= 48600 && dateDuJour == dateSelectionne) ||
+                dateDuJour > dateSelectionne
+              "
               >12:00 {{ reservation.nom1 }}<br
             /></strike>
             <div v-else>12:00 {{ reservation.nom1 }}</div>
 
-            <strike v-if="heureCourante >= 53100"
+            <strike
+              v-if="
+                (heureCourante >= 53100 && dateDuJour == dateSelectionne) ||
+                dateDuJour > dateSelectionne
+              "
               >13:30 {{ reservation.nom2 }}<br
             /></strike>
             <div v-else>13:30 {{ reservation.nom2 }}</div>
 
-            <strike v-if="heureCourante >= 57600"
+            <strike
+              v-if="
+                (heureCourante >= 57600 && dateDuJour == dateSelectionne) ||
+                dateDuJour > dateSelectionne
+              "
               >14:45 {{ reservation.nom3 }}<br
             /></strike>
             <div v-else>14:45 {{ reservation.nom3 }}</div>
 
-            <strike v-if="heureCourante >= 62100"
+            <strike
+              v-if="
+                (heureCourante >= 62100 && dateDuJour == dateSelectionne) ||
+                dateDuJour > dateSelectionne
+              "
               >16:00 {{ reservation.nom4 }}<br
             /></strike>
             <div v-else>16:00 {{ reservation.nom4 }}</div>
 
-            <strike v-if="heureCourante >= 66600"
+            <strike
+              v-if="
+                (heureCourante >= 66600 && dateDuJour == dateSelectionne) ||
+                dateDuJour > dateSelectionne
+              "
               >17:15 {{ reservation.nom5 }}<br
             /></strike>
             <div v-else>17:15 {{ reservation.nom5 }}</div>
@@ -187,6 +207,9 @@ export default {
     )
       .toISOString()
       .substr(0, 10),
+    dateDuJour: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+      .toISOString()
+      .substr(0, 10),
     heureCourante: "",
   }),
 
@@ -259,8 +282,7 @@ export default {
 
   methods: {
     validePassword() {
-      //console.log(process.env.VUE_APP_PASSWORD);
-      if (this.password == "123") {
+      if (this.password == process.env.adminPassword) {
         this.isConnected = true;
         localStorage.admin = "TRUE";
       } else {

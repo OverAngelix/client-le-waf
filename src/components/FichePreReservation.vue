@@ -68,7 +68,7 @@
                 >
                   <template v-slot:activator="{ on, attrs }">
                     <v-text-field
-                      v-model="dateSelectionne"
+                      v-model="formatDate"
                       label="Jour"
                       readonly
                       v-bind="attrs"
@@ -76,7 +76,14 @@
                       outlined
                     ></v-text-field>
                   </template>
-                  <v-date-picker v-model="dateSelectionne" no-title scrollable>
+                  <v-date-picker
+                    v-model="dateSelectionne"
+                    locale="fr-FR"
+                    :min="new Date().toISOString().substr(0, 10)"
+                    :allowed-dates="allowedDates"
+                    no-title
+                    scrollable
+                  >
                     <v-spacer></v-spacer>
                     <v-btn text color="primary" @click="menu = false">
                       Annuler
@@ -133,53 +140,62 @@ export default {
     reservations: [
       {
         idTable: 1,
-        nombreDePersonne: 2,
+        nombreDePersonneMin: 1,
+        nombreDePersonneMax: 2,
         reserve: false,
       },
       {
         idTable: 2,
-        nombreDePersonne: 2,
+        nombreDePersonneMin: 1,
+        nombreDePersonneMax: 2,
         reserve: false,
       },
       {
         idTable: 3,
-        nombreDePersonne: 3,
+        nombreDePersonneMin: 2,
+        nombreDePersonneMax: 3,
         reserve: false,
       },
       {
         idTable: 4,
-        nombreDePersonne: 5,
+        nombreDePersonneMin: 3,
+        nombreDePersonneMax: 6,
         reserve: false,
       },
       {
         idTable: 5,
-        nombreDePersonne: 5,
+        nombreDePersonneMin: 3,
+        nombreDePersonneMax: 6,
         reserve: false,
       },
       {
         idTable: 6,
-        nombreDePersonne: 7,
+        nombreDePersonneMin: 4,
+        nombreDePersonneMax: 10,
         reserve: false,
       },
       {
         idTable: 7,
-        nombreDePersonne: 2,
+        nombreDePersonneMin: 1,
+        nombreDePersonneMax: 2,
         reserve: false,
       },
       {
         idTable: 8,
-        nombreDePersonne: 2,
+        nombreDePersonneMin: 1,
+        nombreDePersonneMax: 2,
         reserve: false,
       },
       {
         idTable: 9,
-        nombreDePersonne: 5,
+        nombreDePersonneMin: 3,
+        nombreDePersonneMax: 6,
         reserve: false,
       },
     ],
     nbPersonne: "",
     creneaux: ["12:00", "13:30", "14:45", "16:00", "17:15"],
-    selectPersonne: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    selectPersonne: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     menu: false,
     dateSelectionne: new Date(
       Date.now() - new Date().getTimezoneOffset() * 60000
@@ -192,7 +208,6 @@ export default {
     email: "",
     informationsComplementaires: "",
     idTableSelected: -1,
-
     emailRules: [
       (v) => !!v || "Email obligatoire",
       (v) => /.+@.+\..+/.test(v) || "Email non valide",
@@ -210,7 +225,20 @@ export default {
     valid: false,
   }),
 
+  computed: {
+    formatDate() {
+      var datearray = this.dateSelectionne.split("-");
+      return datearray[2] + "/" + datearray[1] + "/" + datearray[0];
+    },
+  },
+
   methods: {
+    allowedDates(val) {
+      let idxDate = new Date(val).getDay();
+      //Transfoormer liste en formulaire
+      return idxDate !== 1 && idxDate !== 2 && !["2021-10-31"].includes(val);
+    },
+
     closeModal() {
       this.nom = "";
       this.nbPersonne = "";
@@ -259,7 +287,7 @@ export default {
           "",
           "success"
         );
-        this.dialog = false;
+        this.closeModal();
       } else {
         let reservationsDTO = await ReservationsRepository.getReservations({
           heureReservation: this.heureSelectionne,
@@ -273,22 +301,51 @@ export default {
             }
           }
         }
+        let isResa = false;
         for (let i = 0; i < this.reservations.length; i++) {
           if (
             this.reservations[i].reserve == false &&
             this.idTableSelected == -1
           ) {
             if (
-              this.nbPersonne == this.reservations[i].nombreDePersonne - 1 ||
-              this.nbPersonne == this.reservations[i].nombreDePersonne
+              this.nbPersonne >= this.reservations[i].nombreDePersonneMin &&
+              this.nbPersonne <= this.reservations[i].nombreDePersonneMax
             ) {
               this.preReservation = false;
               this.disponibilite = true;
               this.idTableSelected = this.reservations[i].idTable;
+              isResa = true;
             }
           }
         }
-
+        if (!isResa) {
+          for (let i = 0; i < this.reservations.length; i++) {
+            if (
+              this.reservations[i].reserve == false &&
+              this.idTableSelected == -1
+            ) {
+              let today = new Date(
+                Date.now() - new Date().getTimezoneOffset() * 60000
+              );
+              let tomorrow = new Date(
+                Date.now() - new Date().getTimezoneOffset() * 60000
+              );
+              tomorrow.setDate(tomorrow.getDate() + 1);
+              let currentDate = new Date(this.dateSelectionne);
+              if (
+                this.nbPersonne <= this.reservations[i].nombreDePersonneMax &&
+                (currentDate.toISOString().substr(0, 10) ===
+                  today.toISOString().substr(0, 10) ||
+                  currentDate.toISOString().substr(0, 10) ===
+                    tomorrow.toISOString().substr(0, 10))
+              ) {
+                this.preReservation = false;
+                this.disponibilite = true;
+                this.idTableSelected = this.reservations[i].idTable;
+              }
+            }
+          }
+        }
         if (this.idTableSelected == -1) {
           this.preReservation = true;
           this.disponibilite = false;

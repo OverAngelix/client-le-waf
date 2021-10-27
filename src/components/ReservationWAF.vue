@@ -271,8 +271,8 @@ export default {
     },
 
     validePassword() {
-      console.log(process.env.VUE_APP_PASSWORD);
-      if (this.password == "123") {
+      console.log(process.env.adminPassword);
+      if (this.password == process.env.adminPassword) {
         this.isConnected = true;
         localStorage.admin = "TRUE";
       } else {
