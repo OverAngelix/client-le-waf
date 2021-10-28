@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-    <v-app-bar
+    <!-- <v-app-bar
       app
       color="#cde8f8"
       
@@ -19,7 +19,7 @@
         <span class="mr-2">Retour au WAF</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
-    </v-app-bar>
+    </v-app-bar> -->
 
     <v-main>
    <router-view/>

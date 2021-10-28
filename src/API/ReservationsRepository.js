@@ -2,7 +2,7 @@ import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
-/* export default {
+export default {
 
   async getReservations(criteres) {
     const reservations = await axios.get(
@@ -54,9 +54,9 @@ axios.defaults.withCredentials = true;
     return response.data;
   },
 
-}; */
+};
 
-export default {
+/* export default {
 
   async getReservations(criteres) {
     const reservations = await axios.get(
@@ -107,4 +107,4 @@ export default {
     );
     return reservations.data;
   },
-};
+}; */
