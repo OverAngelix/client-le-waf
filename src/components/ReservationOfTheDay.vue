@@ -117,6 +117,7 @@
                   dark
                   x-small
                   color="green"
+                    @click="newReservation(reservation.idTable, '12:00')"
                 >
                   <v-icon dark> mdi-plus-thick </v-icon>
                 </v-btn>
@@ -181,6 +182,7 @@
                   dark
                   x-small
                   color="green"
+                    @click="newReservation(reservation.idTable, '13:30')"
                 >
                   <v-icon dark> mdi-plus-thick </v-icon>
                 </v-btn>
@@ -245,6 +247,7 @@
                   dark
                   x-small
                   color="green"
+                    @click="newReservation(reservation.idTable, '14:45')"
                 >
                   <v-icon dark> mdi-plus-thick </v-icon>
                 </v-btn>
@@ -308,6 +311,7 @@
                   dark
                   x-small
                   color="green"
+                    @click="newReservation(reservation.idTable, '16:00')"
                 >
                   <v-icon dark> mdi-plus-thick </v-icon>
                 </v-btn>
