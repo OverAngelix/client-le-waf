@@ -68,7 +68,7 @@
                 >
                   <template v-slot:activator="{ on, attrs }">
                     <v-text-field
-                      v-model="formatDate"
+                      v-model="dateFR"
                       label="Jour"
                       readonly
                       v-bind="attrs"
@@ -100,7 +100,7 @@
               </v-col>
               <v-col cols="12" sm="3">
                 <v-select
-                  :items="creneaux"
+                  :items="heureReservation"
                   v-model="heureSelectionne"
                   label="Heure"
                   outlined
@@ -194,7 +194,6 @@ export default {
       },
     ],
     nbPersonne: "",
-    creneaux: ["12:00", "13:30", "14:45", "16:00", "17:15"],
     selectPersonne: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     menu: false,
     dateSelectionne: new Date(
@@ -202,7 +201,8 @@ export default {
     )
       .toISOString()
       .substr(0, 10),
-    heureSelectionne: "12:00",
+    heureSelectionne: "",
+    heureCourante: "",
     nom: "",
     prenom: "",
     email: "",
@@ -225,14 +225,63 @@ export default {
     valid: false,
   }),
 
+  created() {
+    const heure = new Date();
+    this.heureCourante = heure.getHours() * 60 * 60 + heure.getMinutes() * 60;
+  },
+
   computed: {
-    formatDate() {
-      var datearray = this.dateSelectionne.split("-");
-      return datearray[2] + "/" + datearray[1] + "/" + datearray[0];
+    dateFR() {
+      return this.formatDate();
+    },
+
+    heureReservation() {
+      return this.changeDebutCreneaux();
     },
   },
 
   methods: {
+    formatDate() {
+      var datearray = this.dateSelectionne.split("-");
+      return datearray[2] + "/" + datearray[1] + "/" + datearray[0];
+    },
+    changeDebutCreneaux() {
+      let dateDuJour = new Date(
+        Date.now() - new Date().getTimezoneOffset() * 60000
+      )
+        .toISOString()
+        .substr(0, 10);
+      if (dateDuJour == this.dateSelectionne) {
+        if (this.heureCourante < 49200) {
+          this.heureSelectionne = "13:30";
+          return ["13:30", "14:45", "16:00", "17:15"];
+        }
+        if (this.heureCourante < 54300) {
+          this.heureSelectionne = "14:45";
+          return ["14:45", "16:00", "17:15"];
+        }
+        if (this.heureCourante < 58800) {
+          this.heureSelectionne = "16:00";
+          return ["16:00", "17:15"];
+        }
+        if (this.heureCourante < 63300) {
+          this.heureSelectionne = "17:15";
+          return ["17:15"];
+        }
+        if (this.heureCourante > 66600) {
+          let tomorrow = new Date(
+            Date.now() - new Date().getTimezoneOffset() * 60000
+          );
+          tomorrow.setDate(tomorrow.getDate() + 1);
+          this.dateSelectionne = tomorrow.toISOString().substr(0, 10);
+          this.heureSelectionne = "12:00";
+          return ["12:00", "13:30", "14:45", "16:00", "17:15"];
+        }
+      }
+      this.heureSelectionne = "12:00";
+      return ["12:00", "13:30", "14:45", "16:00", "17:15"];
+    },
+
     allowedDates(val) {
       let idxDate = new Date(val).getDay();
       //Transfoormer liste en formulaire
@@ -266,28 +315,74 @@ export default {
 
     async processusReservation() {
       if (this.disponibilite) {
-        await ReservationsRepository.addReservation({
-          nom: this.nom,
-          prenom: this.prenom,
+        let result = await ReservationsRepository.verificationMail({
+          //date: this.dateSelectionne + " 02:00:00.000",
+          date: this.dateSelectionne + " 00:00:00.000",
           email: this.email,
-          nbPersonne: this.nbPersonne,
-          informationComplementaires: this.informationsComplementaires,
-          dateReservation: this.dateSelectionne,
-          idTable: this.idTableSelected,
-          heureReservation: this.heureSelectionne,
         });
-        this.$alert(
-          "La reservation au nom de " +
-            this.nom +
-            " le " +
-            this.formatDate() +
-            " à " +
-            this.heureSelectionne +
-            " a été validé avec succès ! \n Un email de confirmation vous a été envoyé (pensez au spam :D)",
-          "",
-          "success"
-        );
-        this.closeModal();
+        if (result.length == 1) {
+          this.$confirm(
+            `Vous avez deja un reservation ce jour à ${this.heureSelectionne} avec ${this.nbPersonne}. \nPensez à l'annuler si elle n'est plus necessaire (lien dans le mail de reservation)`,
+            "Attention",
+            ""
+          )
+            .then(async () => {
+              await ReservationsRepository.addReservation({
+                nom: this.nom,
+                prenom: this.prenom,
+                email: this.email,
+                nbPersonne: this.nbPersonne,
+                informationComplementaires: this.informationsComplementaires,
+                dateReservation: this.dateSelectionne,
+                idTable: this.idTableSelected,
+                heureReservation: this.heureSelectionne,
+              });
+              this.$alert(
+                "La reservation au nom de " +
+                  this.nom +
+                  " le " +
+                  this.formatDate() +
+                  " à " +
+                  this.heureSelectionne +
+                  " a été validé avec succès ! \n Un email de confirmation vous a été envoyé (pensez au spam :D)",
+                "",
+                "success"
+              );
+              this.closeModal();
+            })
+            .catch(() => {
+              this.closeModal();
+            });
+        } else if (result.length > 1) {
+          this.$alert(
+            "Vous avez deja deux reservations ! Il faut laisser la place aux autres :)",
+            "",
+            "error"
+          );
+        } else {
+          await ReservationsRepository.addReservation({
+            nom: this.nom,
+            prenom: this.prenom,
+            email: this.email,
+            nbPersonne: this.nbPersonne,
+            informationComplementaires: this.informationsComplementaires,
+            dateReservation: this.dateSelectionne,
+            idTable: this.idTableSelected,
+            heureReservation: this.heureSelectionne,
+          });
+          this.$alert(
+            "La reservation au nom de " +
+              this.nom +
+              " le " +
+              this.formatDate() +
+              " à " +
+              this.heureSelectionne +
+              " a été validé avec succès ! \n Un email de confirmation vous a été envoyé (pensez au spam :D)",
+            "",
+            "success"
+          );
+          this.closeModal();
+        }
       } else {
         let reservationsDTO = await ReservationsRepository.getReservations({
           heureReservation: this.heureSelectionne,

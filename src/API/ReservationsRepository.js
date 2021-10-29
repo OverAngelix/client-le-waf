@@ -18,6 +18,14 @@ axios.defaults.withCredentials = true;
     return reservations.data;
   },
 
+  async verificationMail(criteres) {
+    const reservations = await axios.get(
+      "http://localhost:3001/api/reservations/confirmation/email", { params: criteres }
+    );
+    return reservations.data;
+  },
+
+
   async getReservation(id) {
     const reservations = await axios.get(
       "http://localhost:3001/api/reservations/"+id
@@ -68,6 +76,13 @@ export default {
    async getReservationsDuJour(criteres) {
     const reservations = await axios.get(
       "https://server-le-waf.herokuapp.com/api/reservations/reservationDuJour/jour", { params: criteres }
+    );
+    return reservations.data;
+  },
+
+    async verificationMail(criteres) {
+    const reservations = await axios.get(
+      "https://server-le-waf.herokuapp.com/api/reservations/confirmation/email", { params: criteres }
     );
     return reservations.data;
   },

@@ -73,9 +73,11 @@
               <v-col class="text-right" cols="5">
                 <v-btn
                   v-if="
-                    dateDuJour <= dateSelectionne &&
-                    reservation.nom1.length > 0 &&
-                    heureCourante <= 48600
+                    (dateDuJour == dateSelectionne &&
+                      reservation.nom1.length > 0 &&
+                      heureCourante <= 48600) ||
+                    (dateDuJour < dateSelectionne &&
+                      reservation.nom1.length > 0)
                   "
                   dark
                   x-small
@@ -117,7 +119,7 @@
                   dark
                   x-small
                   color="green"
-                    @click="newReservation(reservation.idTable, '12:00')"
+                  @click="newReservation(reservation.idTable, '12:00')"
                 >
                   <v-icon dark> mdi-plus-thick </v-icon>
                 </v-btn>
@@ -138,9 +140,11 @@
               <v-col class="text-right" cols="5">
                 <v-btn
                   v-if="
-                    dateDuJour <= dateSelectionne &&
-                    reservation.nom2.length > 0 &&
-                    heureCourante <= 53100
+                    (dateDuJour == dateSelectionne &&
+                      reservation.nom2.length > 0 &&
+                      heureCourante <= 53100) ||
+                    (dateDuJour < dateSelectionne &&
+                      reservation.nom2.length > 0)
                   "
                   dark
                   x-small
@@ -182,7 +186,7 @@
                   dark
                   x-small
                   color="green"
-                    @click="newReservation(reservation.idTable, '13:30')"
+                  @click="newReservation(reservation.idTable, '13:30')"
                 >
                   <v-icon dark> mdi-plus-thick </v-icon>
                 </v-btn>
@@ -203,9 +207,11 @@
               <v-col class="text-right" cols="5">
                 <v-btn
                   v-if="
-                    dateDuJour <= dateSelectionne &&
-                    reservation.nom3.length > 0 &&
-                    heureCourante <= 57600
+                    (dateDuJour == dateSelectionne &&
+                      reservation.nom3.length > 0 &&
+                      heureCourante <= 57600) ||
+                    (dateDuJour < dateSelectionne &&
+                      reservation.nom3.length > 0)
                   "
                   dark
                   x-small
@@ -247,7 +253,7 @@
                   dark
                   x-small
                   color="green"
-                    @click="newReservation(reservation.idTable, '14:45')"
+                  @click="newReservation(reservation.idTable, '14:45')"
                 >
                   <v-icon dark> mdi-plus-thick </v-icon>
                 </v-btn>
@@ -268,9 +274,11 @@
               <v-col class="text-right" cols="5">
                 <v-btn
                   v-if="
-                    dateDuJour <= dateSelectionne &&
-                    reservation.nom4.length > 0 &&
-                    heureCourante <= 62100
+                    (dateDuJour == dateSelectionne &&
+                      reservation.nom4.length > 0 &&
+                      heureCourante <= 62100) ||
+                    (dateDuJour < dateSelectionne &&
+                      reservation.nom4.length > 0)
                   "
                   dark
                   x-small
@@ -311,7 +319,7 @@
                   dark
                   x-small
                   color="green"
-                    @click="newReservation(reservation.idTable, '16:00')"
+                  @click="newReservation(reservation.idTable, '16:00')"
                 >
                   <v-icon dark> mdi-plus-thick </v-icon>
                 </v-btn>
@@ -332,9 +340,11 @@
               <v-col class="text-right" cols="5">
                 <v-btn
                   v-if="
-                    dateDuJour <= dateSelectionne &&
-                    reservation.nom5.length > 0 &&
-                    heureCourante <= 66600
+                    (dateDuJour == dateSelectionne &&
+                      reservation.nom5.length > 0 &&
+                      heureCourante <= 66600) ||
+                    (dateDuJour < dateSelectionne &&
+                      reservation.nom5.length > 0)
                   "
                   dark
                   x-small
@@ -580,23 +590,23 @@ export default {
       .toISOString()
       .substr(0, 10),
     heureCourante: "",
-    nbPlaceMax:[
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-                "10",
-                "11",
-                "12",
-                "13",
-                "14",
-                "15",
-              ],
+    nbPlaceMax: [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+    ],
   }),
 
   async created() {
@@ -708,9 +718,7 @@ export default {
       this.$prompt("Nom de la reservation", "").then((prenom) => {
         this.$prompt("Nombre de personnes ?", "")
           .then(async (nbPersonnes) => {
-            if (
-              this.nbPlaceMax.includes(nbPersonnes)
-            ) {
+            if (this.nbPlaceMax.includes(nbPersonnes)) {
               await ReservationsRepository.addReservation({
                 nom: "",
                 prenom: prenom,
