@@ -113,7 +113,8 @@
             >Rappel : Il s'agit de creneaux 1h15 hormis le creneaux de 12h à
             13h30</small
           >
-          <small>En cas de </small>
+          <br>
+          <small>En cas de questions concernant les reservations, contacter <a href="mailto:marine@lewaf.fr">nous</a> </small>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
