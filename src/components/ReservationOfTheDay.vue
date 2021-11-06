@@ -14,6 +14,9 @@
     </div>
     <div v-else>
       <v-row align="center" justify="center">
+        <v-icon class="ma-2" x-large @click="previousDay()">
+          mdi-arrow-left-bold</v-icon
+        >
         <v-col cols="6" md="2">
           <v-menu
             ref="menu"
@@ -47,6 +50,9 @@
             </v-date-picker>
           </v-menu>
         </v-col>
+        <v-icon class="ma-2" x-large @click="nextDay()">
+          mdi-arrow-right-bold</v-icon
+        >
       </v-row>
       <v-row align="center" justify="center">
         <v-col
@@ -616,7 +622,7 @@ export default {
       this.isConnected = true;
     }
     let reservationsDTO = await ReservationsRepository.getReservationsDuJour({
-      //date: this.dateSelectionne + " 02:00:00.000",
+      //date: this.dateSelectionne + " 01:00:00.000",
       date: this.dateSelectionne + " 00:00:00.000",
     });
     for (let i = 0; i < reservationsDTO.length; i++) {
@@ -682,6 +688,18 @@ export default {
     },
   },
   methods: {
+    nextDay() {
+      let tomorrow = new Date(this.dateSelectionne);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      this.dateSelectionne = tomorrow.toISOString().substr(0, 10);
+    },
+
+    previousDay() {
+      let yersterday = new Date(this.dateSelectionne);
+      yersterday.setDate(yersterday.getDate() + -1);
+      this.dateSelectionne = yersterday.toISOString().substr(0, 10);
+    },
+
     validePassword() {
       console.log(process.env.adminPassword);
       if (this.password == "123") {
@@ -746,8 +764,8 @@ export default {
 
     async loadReservations() {
       let reservationsDTO = await ReservationsRepository.getReservationsDuJour({
-        //date: this.dateSelectionne + " 02:00:00.000",
-        date: this.dateSelectionne + " 00:00:00.000",
+        date: this.dateSelectionne + " 01:00:00.000",
+        //date: this.dateSelectionne + " 00:00:00.000",
       });
       for (let j = 0; j < this.reservations.length; j++) {
         this.reservations[j].nom1 = "";

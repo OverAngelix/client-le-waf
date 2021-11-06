@@ -316,7 +316,7 @@ export default {
     async processusReservation() {
       if (this.disponibilite) {
         let result = await ReservationsRepository.verificationMail({
-          //date: this.dateSelectionne + " 02:00:00.000",
+          //date: this.dateSelectionne + " 01:00:00.000",
           date: this.dateSelectionne + " 00:00:00.000",
           email: this.email,
         });
@@ -386,7 +386,7 @@ export default {
       } else {
         let reservationsDTO = await ReservationsRepository.getReservations({
           heureReservation: this.heureSelectionne,
-          //dateReservation: this.dateSelectionne + " 02:00:00.000",
+          //dateReservation: this.dateSelectionne + " 01:00:00.000",
           dateReservation: this.dateSelectionne + " 00:00:00.000",
         });
         for (let i = 0; i < reservationsDTO.length; i++) {

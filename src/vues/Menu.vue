@@ -2,7 +2,13 @@
   <v-container>
     <v-card color="basil">
       <v-card-title class="text-center justify-center py-6">
-        <h1 class="font-weight-bold text-h2 basil--text">Le Waf</h1>
+        <v-img
+          alt="LE WAF"
+          contain
+          max-height="150"
+          max-width="150"
+          src="https://lewaf.files.wordpress.com/2016/06/cropped-cropped-logo-petit-trans2-1-1.png"
+        ></v-img>
       </v-card-title>
 
       <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
@@ -23,6 +29,40 @@
         </v-tab-item>
       </v-tabs-items>
     </v-card>
+
+    <v-footer dark padless>
+      <v-card flat tile class="blue lighten-3 text-center">
+        <v-card-text>
+          <v-btn
+            v-for="icon in icons"
+            :key="icon"
+            class="mx-4 white--text"
+            icon
+          >
+            <v-icon size="24px">
+              {{ icon }}
+            </v-icon>
+          </v-btn>
+        </v-card-text>
+
+        <v-card-text class="black--text pt-0">
+          Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet.
+          Mauris cursus commodo interdum. Praesent ut risus eget metus luctus
+          accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim
+          a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula
+          lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus
+          iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum
+          tempor vel ut orci. Orci varius natoque penatibus et magnis dis
+          parturient montes, nascetur ridiculus mus.
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-text class="black--text">
+          Copyright 2021, Steven Copin
+        </v-card-text>
+      </v-card>
+    </v-footer>
   </v-container>
 </template>
 
@@ -56,6 +96,12 @@ export default {
       "LES COPAINS DU WAF",
       "WAF IN ENGLISH",
     ],
+     icons: [
+        'mdi-facebook',
+        'mdi-twitter',
+        'mdi-linkedin',
+        'mdi-instagram',
+      ],
   }),
 
   methods: {},
