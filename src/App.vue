@@ -1,13 +1,25 @@
 <template>
   <v-app id="app">
     <v-main>
-   <router-view/>
+      <router-view />
     </v-main>
+    <SwitchTheme />
   </v-app>
 </template>
 
+<script>
+import SwitchTheme from "@/components/SwitchTheme";
+
+export default {
+  components: {
+    SwitchTheme,
+  },
+};
+</script>
+
+
 <style>
 #app {
-  background-color: #dd5030;
+  background-color: #f06f53;
 }
 </style>

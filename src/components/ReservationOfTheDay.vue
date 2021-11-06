@@ -764,8 +764,8 @@ export default {
 
     async loadReservations() {
       let reservationsDTO = await ReservationsRepository.getReservationsDuJour({
-        date: this.dateSelectionne + " 01:00:00.000",
-        //date: this.dateSelectionne + " 00:00:00.000",
+        //date: this.dateSelectionne + " 01:00:00.000",
+        date: this.dateSelectionne + " 00:00:00.000",
       });
       for (let j = 0; j < this.reservations.length; j++) {
         this.reservations[j].nom1 = "";
