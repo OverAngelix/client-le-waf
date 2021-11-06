@@ -39,10 +39,11 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="6">
-                <v-text-field
-                  label="Informations complementaires"
+                <v-select
+                  :items="raisons"
                   v-model="informationsComplementaires"
-                ></v-text-field>
+                  label="Informations complementaires"
+                ></v-select>
               </v-col>
             </v-row>
             <v-row v-if="preReservation">
@@ -112,6 +113,7 @@
             >Rappel : Il s'agit de creneaux 1h15 hormis le creneaux de 12h à
             13h30</small
           >
+          <small>En cas de </small>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -143,54 +145,63 @@ export default {
         nombreDePersonneMin: 1,
         nombreDePersonneMax: 2,
         reserve: false,
+        nbPersonne: 0,
       },
       {
         idTable: 2,
         nombreDePersonneMin: 1,
         nombreDePersonneMax: 2,
         reserve: false,
+        nbPersonne: 0,
       },
       {
         idTable: 3,
         nombreDePersonneMin: 2,
         nombreDePersonneMax: 3,
         reserve: false,
+        nbPersonne: 0,
       },
       {
         idTable: 4,
         nombreDePersonneMin: 3,
         nombreDePersonneMax: 6,
         reserve: false,
+        nbPersonne: 0,
       },
       {
         idTable: 5,
         nombreDePersonneMin: 3,
         nombreDePersonneMax: 6,
         reserve: false,
+        nbPersonne: 0,
       },
       {
         idTable: 6,
         nombreDePersonneMin: 4,
         nombreDePersonneMax: 10,
         reserve: false,
+        nbPersonne: 0,
       },
       {
         idTable: 7,
         nombreDePersonneMin: 1,
         nombreDePersonneMax: 2,
         reserve: false,
+        nbPersonne: 0,
       },
       {
         idTable: 8,
         nombreDePersonneMin: 1,
         nombreDePersonneMax: 2,
         reserve: false,
+        nbPersonne: 0,
       },
       {
         idTable: 9,
         nombreDePersonneMin: 3,
         nombreDePersonneMax: 6,
         reserve: false,
+        nbPersonne: 0,
       },
     ],
     nbPersonne: "",
@@ -223,6 +234,7 @@ export default {
         (v && v.length <= 15) || "Le prenom doit faire moins de 15 caractères",
     ],
     valid: false,
+    raisons: ["Anniversaire", "Seminaire", "Association", "EVJF/EVJG"],
   }),
 
   created() {
@@ -316,43 +328,52 @@ export default {
     async processusReservation() {
       if (this.disponibilite) {
         let result = await ReservationsRepository.verificationMail({
-          //date: this.dateSelectionne + " 01:00:00.000",
-          date: this.dateSelectionne + " 00:00:00.000",
+          date: this.dateSelectionne + " 01:00:00.000",
+          //date: this.dateSelectionne + " 00:00:00.000",
           email: this.email,
         });
+
         if (result.length == 1) {
-          this.$confirm(
-            `Vous avez deja un reservation ce jour à ${this.heureSelectionne} avec ${this.nbPersonne}. \nPensez à l'annuler si elle n'est plus necessaire (lien dans le mail de reservation)`,
-            "Attention",
-            ""
-          )
-            .then(async () => {
-              await ReservationsRepository.addReservation({
-                nom: this.nom,
-                prenom: this.prenom,
-                email: this.email,
-                nbPersonne: this.nbPersonne,
-                informationComplementaires: this.informationsComplementaires,
-                dateReservation: this.dateSelectionne,
-                idTable: this.idTableSelected,
-                heureReservation: this.heureSelectionne,
+          if (result[0].heureReservation.includes(this.heureSelectionne)) {
+            this.$alert(
+              "Vous avez deja une reservation sur ce creneau. Il faut d'abord annuler cette reservation avant d'en reprendre une nouvelle (Lien d'annulation dans le mail de votre reservation)",
+              "",
+              "error"
+            );
+          } else {
+            this.$confirm(
+              `Vous avez deja un reservation ce jour à ${this.heureSelectionne} avec ${this.nbPersonne}. \nPensez à l'annuler si elle n'est plus necessaire (Lien d'annulation dans le mail de votre reservation)`,
+              "Attention",
+              ""
+            )
+              .then(async () => {
+                await ReservationsRepository.addReservation({
+                  nom: this.nom,
+                  prenom: this.prenom,
+                  email: this.email,
+                  nbPersonne: this.nbPersonne,
+                  informationComplementaires: this.informationsComplementaires,
+                  dateReservation: this.dateSelectionne,
+                  idTable: this.idTableSelected,
+                  heureReservation: this.heureSelectionne,
+                });
+                this.$alert(
+                  "La reservation au nom de " +
+                    this.nom +
+                    " le " +
+                    this.formatDate() +
+                    " à " +
+                    this.heureSelectionne +
+                    " a été validé avec succès ! \n Un email de confirmation vous a été envoyé (pensez au spam :D)",
+                  "",
+                  "success"
+                );
+                this.closeModal();
+              })
+              .catch(() => {
+                this.closeModal();
               });
-              this.$alert(
-                "La reservation au nom de " +
-                  this.nom +
-                  " le " +
-                  this.formatDate() +
-                  " à " +
-                  this.heureSelectionne +
-                  " a été validé avec succès ! \n Un email de confirmation vous a été envoyé (pensez au spam :D)",
-                "",
-                "success"
-              );
-              this.closeModal();
-            })
-            .catch(() => {
-              this.closeModal();
-            });
+          }
         } else if (result.length > 1) {
           this.$alert(
             "Vous avez deja deux reservations ! Il faut laisser la place aux autres :)",
@@ -386,13 +407,14 @@ export default {
       } else {
         let reservationsDTO = await ReservationsRepository.getReservations({
           heureReservation: this.heureSelectionne,
-          //dateReservation: this.dateSelectionne + " 01:00:00.000",
-          dateReservation: this.dateSelectionne + " 00:00:00.000",
+          dateReservation: this.dateSelectionne + " 01:00:00.000",
+          //dateReservation: this.dateSelectionne + " 00:00:00.000",
         });
         for (let i = 0; i < reservationsDTO.length; i++) {
           for (let j = 0; j < this.reservations.length; j++) {
             if (reservationsDTO[i].idTable == this.reservations[j].idTable) {
               this.reservations[j].reserve = true;
+              this.reservations[j].nbPersonne = reservationsDTO[i].nbPersonne;
             }
           }
         }
@@ -412,6 +434,22 @@ export default {
               isResa = true;
             }
           }
+        }
+        let nbReservationCanape = 0;
+        for (let i = 0; i < this.reservations.length; i++) {
+          if (
+            this.reservations[i].idTable == 6 &&
+            this.reservations[i].reserve &&
+            this.reservations[i].nbPersonne < 4
+          ) {
+            nbReservationCanape++;
+          }
+        }
+        if (nbReservationCanape == 1 && !isResa && this.nbPersonne <= 3) {
+          this.preReservation = false;
+          this.disponibilite = true;
+          this.idTableSelected = 6;
+          isResa = true;
         }
         if (!isResa) {
           for (let i = 0; i < this.reservations.length; i++) {

@@ -31,12 +31,13 @@
           <strong>Awesome! So can I come for a coffee?</strong>
         </p>
         <p>
-          Absolutely! The way it works is there is a 10€ entry fee -it includes
+          Absolutely! The way it works is there is a 7€ entry fee -it includes
           unlimited tea, coffee and squash, a smoothie, hot chocolate and a
-          soda. If you’re feeling greedy, we also sell cakes and smoothies for 3
+          soda. If you’re feeling greedy, we also sell cakes for 3
           extra euros. If you’re thinking of coming on a week-end or with a big
           group, we advise you to make a reservation first.
         </p>
+        <FichePreReservation />
         <v-img
           alt="gateaux"
           contain
@@ -62,10 +63,12 @@
 
 <script>
 import TitleMenu from "../components/TitleMenu";
+import FichePreReservation from "../components/FichePreReservation";
 export default {
   name: "English",
   components: {
     TitleMenu,
+    FichePreReservation,
   },
   data: () => ({}),
 

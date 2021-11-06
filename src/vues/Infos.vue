@@ -71,6 +71,7 @@
           être sur d&rsquo;avoir votre créneau ! Attention le numero de
           téléphone du WAF n'est en service !
         </p>
+        <FichePreReservation />
 
         <v-divider></v-divider>
 
@@ -143,10 +144,12 @@
 
 <script>
 import TitleMenu from "../components/TitleMenu";
+import FichePreReservation from "../components/FichePreReservation";
 export default {
   name: "Infos",
   components: {
     TitleMenu,
+    FichePreReservation,
   },
   data: () => ({}),
 

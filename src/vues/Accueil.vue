@@ -1,34 +1,20 @@
 <template>
   <v-container>
     <v-row align="center" justify="center">
-      <v-carousel
-        hide-delimiters
-        :show-arrows="false"
-        cycle
-        height="200"
-        class="ma-4"
-      >
-        <v-carousel-item
-          v-for="(doggo, i) in doggos"
-          :key="i"
-          :src="doggo.src"
-          reverse-transition="fade-transition"
-          transition="fade-transition"
-        >
-          <v-row class="fill-height" align="center" justify="center">
+      <v-col align="center" justify="center">
+        <v-img
+          alt="reservation"
+          contain
+          class="ma-2"
+          max-height="250"
+          max-width="2000"
+          :src="require(`@/assets/imageReservation.jpg`)"
+          ><v-row class="fill-height" align="center" justify="center">
             <FichePreReservation />
           </v-row>
-        </v-carousel-item>
-      </v-carousel>
-     <!--  <v-img
-        alt="MENU"
-        contain
-        max-height="200"
-        max-width="1000"
-        src="https://lewaf.files.wordpress.com/2019/07/cropped-67510804_1083743338489962_4801365719977558016_o-1.jpg"
-      ></v-img>
- -->
-      <v-col align="center" justify="center">
+        </v-img>
+        
+
         <TitleMenu title="Des Chiens, du Café - Waf Else?"></TitleMenu>
         <p>
           <strong
@@ -282,7 +268,7 @@ export default {
   name: "Accueil",
   components: {
     FichePreReservation,
-    TitleMenu
+    TitleMenu,
   },
   data: () => ({
     doggos: [

@@ -73,10 +73,10 @@
                 reservation.valide1
               "
             >
-              <v-col cols="7">
+              <v-col cols="8">
                 <strike>12:00 {{ reservation.nom1 }}</strike>
               </v-col>
-              <v-col class="text-right" cols="5">
+              <v-col class="text-right" cols="4">
                 <v-btn
                   v-if="
                     (dateDuJour == dateSelectionne &&
@@ -98,8 +98,8 @@
             </v-row>
 
             <v-row dense v-else>
-              <v-col cols="7"> 12:00 {{ reservation.nom1 }} </v-col>
-              <v-col class="text-right" cols="5">
+              <v-col cols="8"> 12:00 {{ reservation.nom1 }} </v-col>
+              <v-col class="text-right" cols="4">
                 <v-btn
                   v-if="reservation.nom1.length > 0"
                   dark
@@ -140,10 +140,10 @@
                 reservation.valide2
               "
             >
-              <v-col cols="7">
+              <v-col cols="8">
                 <strike>13:30 {{ reservation.nom2 }}</strike>
               </v-col>
-              <v-col class="text-right" cols="5">
+              <v-col class="text-right" cols="4">
                 <v-btn
                   v-if="
                     (dateDuJour == dateSelectionne &&
@@ -165,8 +165,8 @@
             </v-row>
 
             <v-row dense v-else>
-              <v-col cols="7"> 13:30 {{ reservation.nom2 }} </v-col>
-              <v-col class="text-right" cols="5">
+              <v-col cols="8"> 13:30 {{ reservation.nom2 }} </v-col>
+              <v-col class="text-right" cols="4">
                 <v-btn
                   v-if="reservation.nom2.length > 0"
                   dark
@@ -207,10 +207,10 @@
                 reservation.valide3
               "
             >
-              <v-col cols="7">
+              <v-col cols="8">
                 <strike>14:45 {{ reservation.nom3 }}</strike>
               </v-col>
-              <v-col class="text-right" cols="5">
+              <v-col class="text-right" cols="4">
                 <v-btn
                   v-if="
                     (dateDuJour == dateSelectionne &&
@@ -232,8 +232,8 @@
             </v-row>
 
             <v-row dense v-else>
-              <v-col cols="7"> 14:45 {{ reservation.nom3 }} </v-col>
-              <v-col class="text-right" cols="5">
+              <v-col cols="8"> 14:45 {{ reservation.nom3 }} </v-col>
+              <v-col class="text-right" cols="4">
                 <v-btn
                   v-if="reservation.nom3.length > 0"
                   dark
@@ -274,10 +274,10 @@
                 reservation.valide4
               "
             >
-              <v-col cols="7">
+              <v-col cols="8">
                 <strike>16:00 {{ reservation.nom4 }}</strike>
               </v-col>
-              <v-col class="text-right" cols="5">
+              <v-col class="text-right" cols="4">
                 <v-btn
                   v-if="
                     (dateDuJour == dateSelectionne &&
@@ -298,8 +298,8 @@
               </v-col>
             </v-row>
             <v-row dense v-else>
-              <v-col cols="7"> 16:00 {{ reservation.nom4 }} </v-col>
-              <v-col class="text-right" cols="5">
+              <v-col cols="8"> 16:00 {{ reservation.nom4 }} </v-col>
+              <v-col class="text-right" cols="4">
                 <v-btn
                   v-if="reservation.nom4.length > 0"
                   dark
@@ -340,10 +340,10 @@
                 reservation.valide5
               "
             >
-              <v-col cols="7">
+              <v-col cols="8">
                 <strike>17:15 {{ reservation.nom5 }}</strike>
               </v-col>
-              <v-col class="text-right" cols="5">
+              <v-col class="text-right" cols="4">
                 <v-btn
                   v-if="
                     (dateDuJour == dateSelectionne &&
@@ -365,8 +365,8 @@
             </v-row>
 
             <v-row dense v-else>
-              <v-col cols="7"> 17:15 {{ reservation.nom5 }} </v-col>
-              <v-col class="text-right" cols="5">
+              <v-col cols="8"> 17:15 {{ reservation.nom5 }} </v-col>
+              <v-col class="text-right" cols="4">
                 <v-btn
                   v-if="reservation.nom5.length > 0"
                   dark
@@ -622,8 +622,8 @@ export default {
       this.isConnected = true;
     }
     let reservationsDTO = await ReservationsRepository.getReservationsDuJour({
-      //date: this.dateSelectionne + " 01:00:00.000",
-      date: this.dateSelectionne + " 00:00:00.000",
+      date: this.dateSelectionne + " 01:00:00.000",
+      //date: this.dateSelectionne + " 00:00:00.000",
     });
     for (let i = 0; i < reservationsDTO.length; i++) {
       for (let j = 0; j < this.reservations.length; j++) {
@@ -764,8 +764,8 @@ export default {
 
     async loadReservations() {
       let reservationsDTO = await ReservationsRepository.getReservationsDuJour({
-        //date: this.dateSelectionne + " 01:00:00.000",
-        date: this.dateSelectionne + " 00:00:00.000",
+        date: this.dateSelectionne + " 01:00:00.000",
+        //date: this.dateSelectionne + " 00:00:00.000",
       });
       for (let j = 0; j < this.reservations.length; j++) {
         this.reservations[j].nom1 = "";
@@ -791,47 +791,87 @@ export default {
               case "12:00:00":
                 this.reservations[j].id1 = reservationsDTO[i].id;
                 this.reservations[j].valide1 = reservationsDTO[i].valide;
-                this.reservations[j].nom1 =
+                this.reservations[j].nom1 +=
+                  " " +
                   reservationsDTO[i].prenom +
                   " (" +
                   reservationsDTO[i].nbPersonne +
                   ")";
+                if (
+                  reservationsDTO[i].informationComplementaires != null &&
+                  reservationsDTO[i].informationComplementaires != ""
+                ) {
+                  this.reservations[j].nom1 +=
+                    " [" + reservationsDTO[i].informationComplementaires + "]";
+                }
                 break;
               case "13:30:00":
                 this.reservations[j].id2 = reservationsDTO[i].id;
                 this.reservations[j].valide2 = reservationsDTO[i].valide;
-                this.reservations[j].nom2 =
+                this.reservations[j].nom2 +=
+                  " " +
                   reservationsDTO[i].prenom +
                   " (" +
                   reservationsDTO[i].nbPersonne +
                   ")";
+                if (
+                  reservationsDTO[i].informationComplementaires != null &&
+                  reservationsDTO[i].informationComplementaires != ""
+                ) {
+                  this.reservations[j].nom2 +=
+                    " [" + reservationsDTO[i].informationComplementaires + "]";
+                }
                 break;
               case "14:45:00":
                 this.reservations[j].id3 = reservationsDTO[i].id;
                 this.reservations[j].valide3 = reservationsDTO[i].valide;
-                this.reservations[j].nom3 =
+                this.reservations[j].nom3 +=
+                  " " +
                   reservationsDTO[i].prenom +
                   " (" +
                   reservationsDTO[i].nbPersonne +
                   ")";
+                if (
+                  reservationsDTO[i].informationComplementaires != null &&
+                  reservationsDTO[i].informationComplementaires != ""
+                ) {
+                  this.reservations[j].nom3 +=
+                    " [" + reservationsDTO[i].informationComplementaires + "]";
+                }
                 break;
               case "16:00:00":
                 this.reservations[j].id4 = reservationsDTO[i].id;
                 this.reservations[j].valide4 = reservationsDTO[i].valide;
-                this.reservations[j].nom4 =
+                this.reservations[j].nom4 +=
+                  " " +
                   reservationsDTO[i].prenom +
                   " (" +
                   reservationsDTO[i].nbPersonne +
                   ")";
+                if (
+                  reservationsDTO[i].informationComplementaires != null &&
+                  reservationsDTO[i].informationComplementaires != ""
+                ) {
+                  this.reservations[j].nom4 +=
+                    " [" + reservationsDTO[i].informationComplementaires + "]";
+                }
                 break;
               case "17:15:00":
                 this.reservations[j].id5 = reservationsDTO[i].id;
                 this.reservations[j].valide5 = reservationsDTO[i].valide;
-                this.reservations[j].nom5 =
+                this.reservations[j].nom5 +=
+                  " " +
                   reservationsDTO[i].prenom +
                   " (" +
                   reservationsDTO[i].nbPersonne +
                   ")";
+                if (
+                  reservationsDTO[i].informationComplementaires != null &&
+                  reservationsDTO[i].informationComplementaires != ""
+                ) {
+                  this.reservations[j].nom5 +=
+                    " [" + reservationsDTO[i].informationComplementaires + "]";
+                }
                 break;
               default:
                 console.log("Error sur l'heure dans la base");
