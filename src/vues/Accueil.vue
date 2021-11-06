@@ -2,20 +2,21 @@
   <v-container>
     <v-row align="center" justify="center">
       <v-col align="center" justify="center">
+         <TitleMenu title="Des Chiens, du Café - Waf Else?"></TitleMenu>
         <v-img
           alt="reservation"
           contain
-          class="ma-2"
-          max-height="250"
+          class="mb-4"
+          max-height="300"
           max-width="2000"
           :src="require(`@/assets/imageReservation.jpg`)"
-          ><v-row class="fill-height" align="center" justify="center">
+          ><v-row class="fill-height" align="end" justify="center">
             <FichePreReservation />
           </v-row>
         </v-img>
         
 
-        <TitleMenu title="Des Chiens, du Café - Waf Else?"></TitleMenu>
+       
         <p>
           <strong
             ><span style="color: #ff6600"
