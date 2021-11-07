@@ -1,21 +1,25 @@
 <template>
   <v-container>
     <v-row class="justify-center">
-      <v-carousel
-        hide-delimiters
-        :show-arrows="false"
-        cycle
-        height="450"
-        class="ma-4"
-      >
-        <v-carousel-item
-          v-for="(doggo, i) in doggos"
-          :key="i"
-          :src="doggo.src"
-          reverse-transition="fade-transition"
-          transition="fade-transition"
-        >
-          <v-row class="fill-height" align="center" justify="center">
+      <v-card flat tile class="flex">
+        <v-card-title class="text-center justify-center py-6">
+          <v-img
+            alt="LE WAF"
+            contain
+            max-height="150"
+            max-width="150"
+            src="https://lewaf.files.wordpress.com/2016/06/cropped-cropped-logo-petit-trans2-1-1.png"
+          ></v-img>
+        </v-card-title>
+
+        <v-img
+          alt="reservation"
+          contain
+          class="mb-4"
+          max-height="350"
+          max-width="2000"
+          :src="require(`@/assets/imageReservation.jpg`)"
+          ><v-row class="fill-height" align="end" justify="center">
             <v-btn
               class="ma-4"
               @click="confirmationAnnulation"
@@ -25,8 +29,8 @@
               Confirmation de l'annulation
             </v-btn>
           </v-row>
-        </v-carousel-item>
-      </v-carousel>
+        </v-img>
+      </v-card>
     </v-row>
   </v-container>
 </template>
@@ -59,7 +63,7 @@ export default {
           await ReservationsRepository.deleteReservationToken(
             this.$route.params.token
           );
-          this.$router.push({path: '/'});
+          this.$router.push({ path: "/" });
         }
       );
     },
