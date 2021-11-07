@@ -6,7 +6,7 @@
           alt="menu"
           contain
           class="mb-4"
-          max-height="1000"
+          max-height="500"
           max-width="2000"
           :src="require(`@/assets/carte.jpg`)"
         >
