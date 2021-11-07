@@ -113,8 +113,11 @@
             >Rappel : Il s'agit de creneaux 1h15 hormis le creneaux de 12h à
             13h30</small
           >
-          <br>
-          <small>En cas de questions concernant les reservations, contacter <a href="mailto:marine@lewaf.fr">nous</a> </small>
+          <br />
+          <small
+            >En cas de questions concernant les reservations, contacter
+            <a href="mailto:marine@lewaf.fr">nous</a>
+          </small>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -261,10 +264,8 @@ export default {
     changeDebutCreneaux() {
       let dateDuJour = new Date(
         Date.now() - new Date().getTimezoneOffset() * 60000
-      )
-        .toISOString()
-        .substr(0, 10);
-      if (dateDuJour == this.dateSelectionne) {
+      );
+      if (dateDuJour.toISOString().substr(0, 10) == this.dateSelectionne) {
         if (this.heureCourante < 49200) {
           this.heureSelectionne = "13:30";
           return ["13:30", "14:45", "16:00", "17:15"];
@@ -286,10 +287,18 @@ export default {
             Date.now() - new Date().getTimezoneOffset() * 60000
           );
           tomorrow.setDate(tomorrow.getDate() + 1);
+          if (tomorrow.toString().substring(0, 3) == "Mon") {
+            tomorrow.setDate(tomorrow.getDate() + 2);
+          }
           this.dateSelectionne = tomorrow.toISOString().substr(0, 10);
           this.heureSelectionne = "12:00";
           return ["12:00", "13:30", "14:45", "16:00", "17:15"];
         }
+      }
+      if (dateDuJour.toString().substring(0, 3) == "Mon") {
+        dateDuJour.setDate(dateDuJour.getDate() + 2);
+      } else if (dateDuJour.toString().substring(0, 3) == "Tue") {
+        dateDuJour.setDate(dateDuJour.getDate() + 1);
       }
       this.heureSelectionne = "12:00";
       return ["12:00", "13:30", "14:45", "16:00", "17:15"];
@@ -343,7 +352,12 @@ export default {
             );
           } else {
             this.$confirm(
-              `Vous avez deja un reservation ce jour à ${result[0].heureReservation.substring(0, 5)} avec ${result[0].nbPersonne}. \nPensez à l'annuler si elle n'est plus necessaire (Lien d'annulation dans le mail de votre reservation)`,
+              `Vous avez deja un reservation ce jour à ${result[0].heureReservation.substring(
+                0,
+                5
+              )} avec ${
+                result[0].nbPersonne
+              }. \nPensez à l'annuler si elle n'est plus necessaire (Lien d'annulation dans le mail de votre reservation)`,
               "Attention",
               ""
             )
