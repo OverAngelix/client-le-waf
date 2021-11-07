@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import AnnulationReservation from '../components/AnnulationReservation.vue'
 import ReservationOfTheDay from '../components/ReservationOfTheDay.vue'
 import Menu from '../vues/Menu.vue'
+import Carte from '../vues/Carte.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -13,6 +14,14 @@ const routes = [
         component: Menu,
         meta: {
             title: "Le Waf - le premier café chiens d'Europe ",
+        }
+    },
+    {
+        path: '/carte',
+        name: 'Carte',
+        component: Carte,
+        meta: {
+            title: "La carte du Waf",
         }
     },
     {
