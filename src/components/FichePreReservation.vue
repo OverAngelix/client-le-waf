@@ -343,7 +343,7 @@ export default {
             );
           } else {
             this.$confirm(
-              `Vous avez deja un reservation ce jour à ${this.heureSelectionne} avec ${this.nbPersonne}. \nPensez à l'annuler si elle n'est plus necessaire (Lien d'annulation dans le mail de votre reservation)`,
+              `Vous avez deja un reservation ce jour à ${result.heureReservation} avec ${result.nbPersonne}. \nPensez à l'annuler si elle n'est plus necessaire (Lien d'annulation dans le mail de votre reservation)`,
               "Attention",
               ""
             )
