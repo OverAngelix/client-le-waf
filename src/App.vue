@@ -3,16 +3,16 @@
     <v-main>
       <router-view />
     </v-main>
-    <SwitchTheme />
+   <!--   <SwitchTheme />-->
   </v-app>
 </template>
 
 <script>
-import SwitchTheme from "@/components/SwitchTheme";
+//import SwitchTheme from "@/components/SwitchTheme";
 
 export default {
   components: {
-    SwitchTheme,
+   // SwitchTheme,
   },
 };
 </script>
