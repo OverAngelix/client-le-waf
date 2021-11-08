@@ -265,7 +265,15 @@ export default {
       let dateDuJour = new Date(
         Date.now() - new Date().getTimezoneOffset() * 60000
       );
-      if (dateDuJour.toISOString().substr(0, 10) == this.dateSelectionne) {
+      if (dateDuJour.toString().substring(0, 3) == "Mon") {
+        dateDuJour.setDate(dateDuJour.getDate() + 2);
+        this.dateSelectionne = dateDuJour.toISOString().substr(0, 10);
+      } else if (dateDuJour.toString().substring(0, 3) == "Tue") {
+        dateDuJour.setDate(dateDuJour.getDate() + 1);
+        this.dateSelectionne = dateDuJour.toISOString().substr(0, 10);
+      } else if (
+        dateDuJour.toISOString().substr(0, 10) == this.dateSelectionne
+      ) {
         if (this.heureCourante < 49200) {
           this.heureSelectionne = "13:30";
           return ["13:30", "14:45", "16:00", "17:15"];
@@ -295,11 +303,6 @@ export default {
           return ["12:00", "13:30", "14:45", "16:00", "17:15"];
         }
       }
-      if (dateDuJour.toString().substring(0, 3) == "Mon") {
-        dateDuJour.setDate(dateDuJour.getDate() + 2);
-      } else if (dateDuJour.toString().substring(0, 3) == "Tue") {
-        dateDuJour.setDate(dateDuJour.getDate() + 1);
-      }
       this.heureSelectionne = "12:00";
       return ["12:00", "13:30", "14:45", "16:00", "17:15"];
     },
@@ -317,11 +320,7 @@ export default {
       this.idTableSelected = -1;
       this.email = "";
       this.informationsComplementaires = "";
-      this.dateSelectionne = new Date(
-        Date.now() - new Date().getTimezoneOffset() * 60000
-      )
-        .toISOString()
-        .substr(0, 10);
+      this.changeDebutCreneaux();
       this.heureSelectionne = "12:00";
       this.preReservation = true;
       this.disponibilite = false;
