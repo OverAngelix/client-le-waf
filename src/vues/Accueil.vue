@@ -2,7 +2,7 @@
   <v-container>
     <v-row align="center" justify="center">
       <v-col align="center" justify="center">
-         <TitleMenu title="Des Chiens, du Café - Waf Else?"></TitleMenu>
+        <TitleMenu title="Des Chiens, du Café - Waf Else?"></TitleMenu>
         <v-img
           alt="reservation"
           contain
@@ -14,9 +14,7 @@
             <FichePreReservation />
           </v-row>
         </v-img>
-        
 
-       
         <p>
           <strong
             ><span style="color: #ff6600"
@@ -64,16 +62,14 @@
           en garderie pendant que leurs parents travaillent.
         </p>
 
-        <!--IFRAME PAS OK  -->
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/Th8W2gbAOrE"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+        <div class="frameResponsive">
+          <iframe
+            class="responsive-iframe"
+            src="https://www.youtube.com/embed/Th8W2gbAOrE"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
 
         <v-divider></v-divider>
 
@@ -289,3 +285,22 @@ export default {
   }),
 };
 </script>
+
+<style scoped>
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.frameResponsive {
+  position: relative;
+  overflow: hidden;
+  width: 75%;
+  padding-top: 42.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+}
+</style>

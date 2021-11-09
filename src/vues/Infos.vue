@@ -6,14 +6,14 @@
         <p>
           <strong>Vous habitez où les Wafous?</strong>
         </p>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2530.3906224062976!2d3.0534624149729623!3d50.638436181683794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c2d58095fff41d%3A0x92aabf1e3498bd76!2sLe%20Waf!5e0!3m2!1sfr!2sfr!4v1636146787162!5m2!1sfr!2sfr"
-          width="600"
-          height="450"
-          style="border: 0"
-          allowfullscreen=""
-          loading="lazy"
-        ></iframe>
+        <div class="frameResponsive">
+          <iframe
+            class="responsive-iframe"
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3426.8222729829668!2d3.054089620721253!3d50.638071425537085!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x92aabf1e3498bd76!2sLe%20Waf!5e0!3m2!1sfr!2sfr!4v1636454520714!5m2!1sfr!2sfr"
+            allowfullscreen=""
+            loading="lazy"
+          ></iframe>
+        </div>
 
         <p>
           Nous sommes situés dans le Vieux Lille au
@@ -156,3 +156,22 @@ export default {
   methods: {},
 };
 </script>
+
+<style scoped>
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.frameResponsive {
+  position: relative;
+  overflow: hidden;
+  width: 75%;
+  padding-top: 42.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+}
+</style>

@@ -110,18 +110,14 @@
             ><strong>GRAND LILLE TV &#8211; 7 AOÛT 2018</strong></span
           >
         </h2>
-        <div class="jetpack-video-wrapper">
-          <span class="embed-youtube" style="text-align: center; display: block"
-            ><iframe
-              class="youtube-player"
-              width="950"
-              height="535"
-              src="https://www.youtube.com/embed/6cI4zFjGSXo?version=3&#038;rel=1&#038;showsearch=0&#038;showinfo=1&#038;iv_load_policy=1&#038;fs=1&#038;hl=fr&#038;autohide=2&#038;wmode=transparent"
-              allowfullscreen="true"
-              style="border: 0"
-              sandbox="allow-scripts allow-same-origin allow-popups allow-presentation"
-            ></iframe
-          ></span>
+
+        <div class="frameResponsive">
+          <iframe
+            class="responsive-iframe"
+            src="https://www.youtube.com/embed/6cI4zFjGSXo?version=3&#038;rel=1&#038;showsearch=0&#038;showinfo=1&#038;iv_load_policy=1&#038;fs=1&#038;hl=fr&#038;autohide=2&#038;wmode=transparent"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
         </div>
 
         <v-divider></v-divider>
@@ -405,3 +401,22 @@ export default {
   methods: {},
 };
 </script>
+
+<style scoped>
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.frameResponsive {
+  position: relative;
+  overflow: hidden;
+  width: 75%;
+  padding-top: 42.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+}
+</style>
