@@ -30,7 +30,7 @@
                   :rules="prenomRules"
                 ></v-text-field>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="12" sm="6" md="6">
                 <v-text-field
                   label="Email*"
                   v-model="email"
@@ -38,7 +38,7 @@
                   :rules="emailRules"
                 ></v-text-field>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="12" sm="6" md="6">
                 <v-select
                   :items="raisons"
                   v-model="informationsComplementaires"
