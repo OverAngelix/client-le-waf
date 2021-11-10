@@ -450,11 +450,11 @@ export default {
           }
         }
         let nbReservationCanape = 0;
-        for (let i = 0; i < this.reservations.length; i++) {
+        for (let i = 0; i < reservationsDTO.length; i++) {
           if (
-            this.reservations[i].idTable == 6 &&
-            this.reservations[i].reserve &&
-            this.reservations[i].nbPersonne < 4
+            reservationsDTO[i].idTable == 6 &&
+            reservationsDTO[i].reserve &&
+            reservationsDTO[i].nbPersonne < 4
           ) {
             nbReservationCanape++;
           }
