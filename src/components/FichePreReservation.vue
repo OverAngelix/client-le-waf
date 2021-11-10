@@ -290,7 +290,7 @@ export default {
           this.heureSelectionne = "17:15";
           return ["17:15"];
         }
-        if (this.heureCourante > 66600) {
+        if (this.heureCourante > 63300) {
           let tomorrow = new Date(
             Date.now() - new Date().getTimezoneOffset() * 60000
           );
