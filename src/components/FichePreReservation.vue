@@ -274,7 +274,11 @@ export default {
       } else if (
         dateDuJour.toISOString().substr(0, 10) == this.dateSelectionne
       ) {
-        if (this.heureCourante < 49200) {
+        if (this.heureCourante < 46200) {
+          this.heureSelectionne = "12:00";
+          return ["12:00","13:30", "14:45", "16:00", "17:15"];
+        }
+        if (this.heureCourante < 49800) {
           this.heureSelectionne = "13:30";
           return ["13:30", "14:45", "16:00", "17:15"];
         }
@@ -453,7 +457,6 @@ export default {
         for (let i = 0; i < reservationsDTO.length; i++) {
           if (
             reservationsDTO[i].idTable == 6 &&
-            reservationsDTO[i].reserve &&
             reservationsDTO[i].nbPersonne < 4
           ) {
             nbReservationCanape++;
