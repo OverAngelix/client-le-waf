@@ -618,13 +618,13 @@ export default {
   async created() {
     const heure = new Date();
     this.heureCourante = heure.getHours() * 60 * 60 + heure.getMinutes() * 60;
-    if (localStorage.admin != "" && localStorage.admin !== undefined) {
+    if (localStorage.password != "" && localStorage.password !== undefined) {
       this.isConnected = true;
     }
   },
 
   mounted() {
-     this.loadReservations();
+    this.loadReservations();
   },
 
   computed: {
@@ -646,11 +646,13 @@ export default {
       this.dateSelectionne = yersterday.toISOString().substr(0, 10);
     },
 
-    validePassword() {
-      console.log(process.env.adminPassword);
-      if (this.password == "123") {
+    async validePassword() {
+      let result = await ReservationsRepository.login({
+        password: this.password,
+      });
+      if (result) {
         this.isConnected = true;
-        localStorage.admin = "TRUE";
+        localStorage.password = "TRUE";
       } else {
         this.$alert("Mot de passe incorrect !", "", "error");
       }
