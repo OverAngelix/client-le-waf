@@ -124,7 +124,8 @@
           <v-btn color="blue darken-1" text @click="closeModal">Annuler</v-btn>
           <v-btn
             color="blue darken-1"
-            :disabled="!valid"
+            :disabled="!valid || loading"
+            :loading="loading"
             text
             @click="processusReservation()"
             >Valider</v-btn
@@ -223,6 +224,7 @@ export default {
     email: "",
     informationsComplementaires: "",
     idTableSelected: -1,
+    loading: false,
     emailRules: [
       (v) => !!v || "Email obligatoire",
       (v) => /.+@.+\..+/.test(v) || "Email non valide",
@@ -276,7 +278,7 @@ export default {
       ) {
         if (this.heureCourante < 46200) {
           this.heureSelectionne = "12:00";
-          return ["12:00","13:30", "14:45", "16:00", "17:15"];
+          return ["12:00", "13:30", "14:45", "16:00", "17:15"];
         }
         if (this.heureCourante < 49800) {
           this.heureSelectionne = "13:30";
@@ -324,8 +326,12 @@ export default {
       this.idTableSelected = -1;
       this.email = "";
       this.informationsComplementaires = "";
-      this.changeDebutCreneaux();
-      this.heureSelectionne = "12:00";
+      (this.dateSelectionne = new Date(
+        Date.now() - new Date().getTimezoneOffset() * 60000
+      )
+        .toISOString()
+        .substr(0, 10)),
+        this.changeDebutCreneaux();
       this.preReservation = true;
       this.disponibilite = false;
       this.resetReservationModel();
@@ -340,12 +346,12 @@ export default {
 
     async processusReservation() {
       if (this.disponibilite) {
+        this.loading = true;
         let result = await ReservationsRepository.verificationMail({
           //date: this.dateSelectionne + " 01:00:00.000",
           date: this.dateSelectionne + " 00:00:00.000",
           email: this.email,
         });
-
         if (result.length == 1) {
           if (result[0].heureReservation.includes(this.heureSelectionne)) {
             this.$alert(
@@ -386,6 +392,7 @@ export default {
                   "",
                   "success"
                 );
+                this.loading = false;
                 this.closeModal();
               })
               .catch(() => {
@@ -399,6 +406,7 @@ export default {
             "error"
           );
         } else {
+          this.loading = true;
           await ReservationsRepository.addReservation({
             nom: this.nom,
             prenom: this.prenom,
@@ -420,9 +428,11 @@ export default {
             "",
             "success"
           );
+          this.loading = false;
           this.closeModal();
         }
       } else {
+        this.loading = true;
         let reservationsDTO = await ReservationsRepository.getReservations({
           heureReservation: this.heureSelectionne,
           //dateReservation: this.dateSelectionne + " 01:00:00.000",
@@ -506,6 +516,7 @@ export default {
             "error"
           );
         }
+        this.loading = false;
       }
     },
   },
