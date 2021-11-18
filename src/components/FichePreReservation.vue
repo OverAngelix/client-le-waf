@@ -267,6 +267,35 @@ export default {
       let dateDuJour = new Date(
         Date.now() - new Date().getTimezoneOffset() * 60000
       );
+      //TEMPORAIRE
+      if (this.dateSelectionne == "2021-11-19") {
+        if (dateDuJour.toISOString().substr(0, 10) == this.dateSelectionne) {
+          if (this.heureCourante < 54300) {
+            this.heureSelectionne = "14:45";
+            return ["14:45", "16:00", "17:15"];
+          }
+          if (this.heureCourante < 58800) {
+            this.heureSelectionne = "16:00";
+            return ["16:00", "17:15"];
+          }
+          if (this.heureCourante < 63300) {
+            this.heureSelectionne = "17:15";
+            return ["17:15"];
+          }
+          if (this.heureCourante > 63300) {
+            let tomorrow = new Date(
+              Date.now() - new Date().getTimezoneOffset() * 60000
+            );
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            this.dateSelectionne = tomorrow.toISOString().substr(0, 10);
+            this.heureSelectionne = "12:00";
+            return ["12:00", "13:30", "14:45", "16:00", "17:15"];
+          }
+        }
+        this.heureSelectionne = "14:45";
+        return ["14:45", "16:00", "17:15"];
+      }
+      //TEMPORAIRE FIN
       if (dateDuJour.toString().substring(0, 3) == "Mon") {
         dateDuJour.setDate(dateDuJour.getDate() + 2);
         this.dateSelectionne = dateDuJour.toISOString().substr(0, 10);
@@ -316,7 +345,7 @@ export default {
     allowedDates(val) {
       let idxDate = new Date(val).getDay();
       //Transfoormer liste en formulaire
-      return idxDate !== 1 && idxDate !== 2 && !["2021-10-31"].includes(val);
+      return idxDate !== 1 && idxDate !== 2 && !["2021-10-31"].includes(val) && !["2021-12-24"].includes(val) && !["2021-12-25"].includes(val) ;
     },
 
     closeModal() {

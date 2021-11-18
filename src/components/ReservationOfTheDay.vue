@@ -2,13 +2,23 @@
   <v-container>
     <div v-if="!isConnected">
       <v-row align="center" justify="center">
-        <v-col cols="12" md="4">
-          <v-text-field
-            label="Mot de passe"
-            type="password"
-            v-on:keyup.enter="validePassword"
-            v-model="password"
-          ></v-text-field>
+        <v-col cols="12" md="4" align="center" justify="center">
+          <v-card class="pa-10" max-width="344" dark>
+            <v-img
+              alt="LE WAF"
+              contain
+              max-height="150"
+              max-width="150"
+              src="https://lewaf.files.wordpress.com/2016/06/cropped-cropped-logo-petit-trans2-1-1.png"
+            ></v-img>
+            <v-text-field
+              label="Mot de passe"
+              type="password"
+              v-on:keyup.enter="validePassword"
+              v-model="password"
+            ></v-text-field>
+            <v-btn @click="validePassword" color="primary"> Connexion </v-btn>
+          </v-card>
         </v-col>
       </v-row>
     </div>
@@ -618,9 +628,6 @@ export default {
   async created() {
     const heure = new Date();
     this.heureCourante = heure.getHours() * 60 * 60 + heure.getMinutes() * 60;
-    if (localStorage.password != "" && localStorage.password !== undefined) {
-      this.isConnected = true;
-    }
   },
 
   mounted() {
@@ -652,7 +659,6 @@ export default {
       });
       if (result) {
         this.isConnected = true;
-        localStorage.password = "TRUE";
       } else {
         this.$alert("Mot de passe incorrect !", "", "error");
       }
