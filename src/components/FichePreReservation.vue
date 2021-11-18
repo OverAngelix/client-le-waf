@@ -47,7 +47,7 @@
               </v-col>
             </v-row>
             <v-row v-if="preReservation">
-              <v-col cols="12" sm="6">
+              <v-col cols="12" sm="5">
                 <v-select
                   :items="selectPersonne"
                   v-model="nbPersonne"
@@ -99,9 +99,11 @@
                   </v-date-picker>
                 </v-menu>
               </v-col>
-              <v-col cols="12" sm="3">
+              <v-col cols="12" sm="4">
                 <v-select
                   :items="heureReservation"
+                  item-text="heurelabel"
+                  item-value="heure"
                   v-model="heureSelectionne"
                   label="Heure"
                   outlined
@@ -272,15 +274,42 @@ export default {
         if (dateDuJour.toISOString().substr(0, 10) == this.dateSelectionne) {
           if (this.heureCourante < 54300) {
             this.heureSelectionne = "14:45";
-            return ["14:45", "16:00", "17:15"];
+            return [
+              {
+                heure: "14:45",
+                heurelabel: "14:45 - 16:00",
+              },
+              {
+                heure: "16:00",
+                heurelabel: "16:00 - 17:15",
+              },
+              {
+                heure: "17:15",
+                heurelabel: "17:15 - 18:30",
+              },
+            ];
           }
           if (this.heureCourante < 58800) {
             this.heureSelectionne = "16:00";
-            return ["16:00", "17:15"];
+            return [
+              {
+                heure: "16:00",
+                heurelabel: "16:00 - 17:15",
+              },
+              {
+                heure: "17:15",
+                heurelabel: "17:15 - 18:30",
+              },
+            ];
           }
           if (this.heureCourante < 63300) {
             this.heureSelectionne = "17:15";
-            return ["17:15"];
+            return [
+              {
+                heure: "17:15",
+                heurelabel: "17:15 - 18:30",
+              },
+            ];
           }
           if (this.heureCourante > 63300) {
             let tomorrow = new Date(
@@ -289,11 +318,45 @@ export default {
             tomorrow.setDate(tomorrow.getDate() + 1);
             this.dateSelectionne = tomorrow.toISOString().substr(0, 10);
             this.heureSelectionne = "12:00";
-            return ["12:00", "13:30", "14:45", "16:00", "17:15"];
+            return [
+              {
+                heure: "12:00",
+                heurelabel: "12:00 - 13:30",
+              },
+              {
+                heure: "13:30",
+                heurelabel: "13:30 - 14:45",
+              },
+              {
+                heure: "14:45",
+                heurelabel: "14:45 - 16:00",
+              },
+              {
+                heure: "16:00",
+                heurelabel: "16:00 - 17:15",
+              },
+              {
+                heure: "17:15",
+                heurelabel: "17:15 - 18:30",
+              },
+            ];
           }
         }
         this.heureSelectionne = "14:45";
-        return ["14:45", "16:00", "17:15"];
+        return [
+          {
+            heure: "14:45",
+            heurelabel: "14:45 - 16:00",
+          },
+          {
+            heure: "16:00",
+            heurelabel: "16:00 - 17:15",
+          },
+          {
+            heure: "17:15",
+            heurelabel: "17:15 - 18:30",
+          },
+        ];
       }
       //TEMPORAIRE FIN
       if (dateDuJour.toString().substring(0, 3) == "Mon") {
@@ -307,23 +370,89 @@ export default {
       ) {
         if (this.heureCourante < 46200) {
           this.heureSelectionne = "12:00";
-          return ["12:00", "13:30", "14:45", "16:00", "17:15"];
+          return [
+              {
+                heure: "12:00",
+                heurelabel: "12:00 - 13:30",
+              },
+              {
+                heure: "13:30",
+                heurelabel: "13:30 - 14:45",
+              },
+              {
+                heure: "14:45",
+                heurelabel: "14:45 - 16:00",
+              },
+              {
+                heure: "16:00",
+                heurelabel: "16:00 - 17:15",
+              },
+              {
+                heure: "17:15",
+                heurelabel: "17:15 - 18:30",
+              },
+            ];
         }
         if (this.heureCourante < 49800) {
           this.heureSelectionne = "13:30";
-          return ["13:30", "14:45", "16:00", "17:15"];
+          return [
+              {
+                heure: "13:30",
+                heurelabel: "13:30 - 14:45",
+              },
+              {
+                heure: "14:45",
+                heurelabel: "14:45 - 16:00",
+              },
+              {
+                heure: "16:00",
+                heurelabel: "16:00 - 17:15",
+              },
+              {
+                heure: "17:15",
+                heurelabel: "17:15 - 18:30",
+              },
+            ];
         }
         if (this.heureCourante < 54300) {
           this.heureSelectionne = "14:45";
-          return ["14:45", "16:00", "17:15"];
+          return [
+              {
+                heure: "14:45",
+                heurelabel: "14:45 - 16:00",
+              },
+              {
+                heure: "16:00",
+                heurelabel: "16:00 - 17:15",
+              },
+              {
+                heure: "17:15",
+                heurelabel: "17:15 - 18:30",
+              },
+            ];
         }
         if (this.heureCourante < 58800) {
           this.heureSelectionne = "16:00";
-          return ["16:00", "17:15"];
+          return [
+              {
+                heure: "16:00",
+                heurelabel: "16:00 - 17:15",
+              },
+              {
+                heure: "17:15",
+                heurelabel: "17:15 - 18:30",
+              },
+            ];
         }
         if (this.heureCourante < 63300) {
           this.heureSelectionne = "17:15";
-          return ["17:15"];
+          return [
+ 
+              {
+                heure: "17:15",
+                heurelabel: "17:15 - 18:30",
+              },
+            ];
         }
         if (this.heureCourante > 63300) {
           let tomorrow = new Date(
@@ -335,17 +464,65 @@ export default {
           }
           this.dateSelectionne = tomorrow.toISOString().substr(0, 10);
           this.heureSelectionne = "12:00";
-          return ["12:00", "13:30", "14:45", "16:00", "17:15"];
+          return [
+              {
+                heure: "12:00",
+                heurelabel: "12:00 - 13:30",
+              },
+              {
+                heure: "13:30",
+                heurelabel: "13:30 - 14:45",
+              },
+              {
+                heure: "14:45",
+                heurelabel: "14:45 - 16:00",
+              },
+              {
+                heure: "16:00",
+                heurelabel: "16:00 - 17:15",
+              },
+              {
+                heure: "17:15",
+                heurelabel: "17:15 - 18:30",
+              },
+            ];
         }
       }
       this.heureSelectionne = "12:00";
-      return ["12:00", "13:30", "14:45", "16:00", "17:15"];
+      return [
+              {
+                heure: "12:00",
+                heurelabel: "12:00 - 13:30",
+              },
+              {
+                heure: "13:30",
+                heurelabel: "13:30 - 14:45",
+              },
+              {
+                heure: "14:45",
+                heurelabel: "14:45 - 16:00",
+              },
+              {
+                heure: "16:00",
+                heurelabel: "16:00 - 17:15",
+              },
+              {
+                heure: "17:15",
+                heurelabel: "17:15 - 18:30",
+              },
+            ];
     },
 
     allowedDates(val) {
       let idxDate = new Date(val).getDay();
       //Transfoormer liste en formulaire
-      return idxDate !== 1 && idxDate !== 2 && !["2021-10-31"].includes(val) && !["2021-12-24"].includes(val) && !["2021-12-25"].includes(val) ;
+      return (
+        idxDate !== 1 &&
+        idxDate !== 2 &&
+        !["2021-10-31"].includes(val) &&
+        !["2021-12-24"].includes(val) &&
+        !["2021-12-25"].includes(val)
+      );
     },
 
     closeModal() {
