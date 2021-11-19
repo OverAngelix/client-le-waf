@@ -273,43 +273,13 @@ export default {
       if (this.dateSelectionne == "2021-11-19") {
         if (dateDuJour.toISOString().substr(0, 10) == this.dateSelectionne) {
           if (this.heureCourante < 54300) {
-            this.heureSelectionne = "14:45";
-            return [
-              {
-                heure: "14:45",
-                heurelabel: "14:45 - 16:00",
-              },
-              {
-                heure: "16:00",
-                heurelabel: "16:00 - 17:15",
-              },
-              {
-                heure: "17:15",
-                heurelabel: "17:15 - 18:30",
-              },
-            ];
+            return this.creneaux(2);
           }
           if (this.heureCourante < 58800) {
-            this.heureSelectionne = "16:00";
-            return [
-              {
-                heure: "16:00",
-                heurelabel: "16:00 - 17:15",
-              },
-              {
-                heure: "17:15",
-                heurelabel: "17:15 - 18:30",
-              },
-            ];
+            return this.creneaux(3);
           }
           if (this.heureCourante < 63300) {
-            this.heureSelectionne = "17:15";
-            return [
-              {
-                heure: "17:15",
-                heurelabel: "17:15 - 18:30",
-              },
-            ];
+            return this.creneaux(4);
           }
           if (this.heureCourante > 63300) {
             let tomorrow = new Date(
@@ -317,46 +287,10 @@ export default {
             );
             tomorrow.setDate(tomorrow.getDate() + 1);
             this.dateSelectionne = tomorrow.toISOString().substr(0, 10);
-            this.heureSelectionne = "12:00";
-            return [
-              {
-                heure: "12:00",
-                heurelabel: "12:00 - 13:30",
-              },
-              {
-                heure: "13:30",
-                heurelabel: "13:30 - 14:45",
-              },
-              {
-                heure: "14:45",
-                heurelabel: "14:45 - 16:00",
-              },
-              {
-                heure: "16:00",
-                heurelabel: "16:00 - 17:15",
-              },
-              {
-                heure: "17:15",
-                heurelabel: "17:15 - 18:30",
-              },
-            ];
+            return this.creneaux(0);
           }
         }
-        this.heureSelectionne = "14:45";
-        return [
-          {
-            heure: "14:45",
-            heurelabel: "14:45 - 16:00",
-          },
-          {
-            heure: "16:00",
-            heurelabel: "16:00 - 17:15",
-          },
-          {
-            heure: "17:15",
-            heurelabel: "17:15 - 18:30",
-          },
-        ];
+        return this.creneaux(2);
       }
       //TEMPORAIRE FIN
       if (dateDuJour.toString().substring(0, 3) == "Mon") {
@@ -369,90 +303,19 @@ export default {
         dateDuJour.toISOString().substr(0, 10) == this.dateSelectionne
       ) {
         if (this.heureCourante < 46200) {
-          this.heureSelectionne = "12:00";
-          return [
-              {
-                heure: "12:00",
-                heurelabel: "12:00 - 13:30",
-              },
-              {
-                heure: "13:30",
-                heurelabel: "13:30 - 14:45",
-              },
-              {
-                heure: "14:45",
-                heurelabel: "14:45 - 16:00",
-              },
-              {
-                heure: "16:00",
-                heurelabel: "16:00 - 17:15",
-              },
-              {
-                heure: "17:15",
-                heurelabel: "17:15 - 18:30",
-              },
-            ];
+          return this.creneaux(0);
         }
         if (this.heureCourante < 49800) {
-          this.heureSelectionne = "13:30";
-          return [
-              {
-                heure: "13:30",
-                heurelabel: "13:30 - 14:45",
-              },
-              {
-                heure: "14:45",
-                heurelabel: "14:45 - 16:00",
-              },
-              {
-                heure: "16:00",
-                heurelabel: "16:00 - 17:15",
-              },
-              {
-                heure: "17:15",
-                heurelabel: "17:15 - 18:30",
-              },
-            ];
+          return this.creneaux(1);
         }
         if (this.heureCourante < 54300) {
-          this.heureSelectionne = "14:45";
-          return [
-              {
-                heure: "14:45",
-                heurelabel: "14:45 - 16:00",
-              },
-              {
-                heure: "16:00",
-                heurelabel: "16:00 - 17:15",
-              },
-              {
-                heure: "17:15",
-                heurelabel: "17:15 - 18:30",
-              },
-            ];
+          return this.creneaux(2);
         }
         if (this.heureCourante < 58800) {
-          this.heureSelectionne = "16:00";
-          return [
-              {
-                heure: "16:00",
-                heurelabel: "16:00 - 17:15",
-              },
-              {
-                heure: "17:15",
-                heurelabel: "17:15 - 18:30",
-              },
-            ];
+          return this.creneaux(3);
         }
         if (this.heureCourante < 63300) {
-          this.heureSelectionne = "17:15";
-          return [
- 
-              {
-                heure: "17:15",
-                heurelabel: "17:15 - 18:30",
-              },
-            ];
+          return this.creneaux(4);
         }
         if (this.heureCourante > 63300) {
           let tomorrow = new Date(
@@ -463,54 +326,37 @@ export default {
             tomorrow.setDate(tomorrow.getDate() + 2);
           }
           this.dateSelectionne = tomorrow.toISOString().substr(0, 10);
-          this.heureSelectionne = "12:00";
-          return [
-              {
-                heure: "12:00",
-                heurelabel: "12:00 - 13:30",
-              },
-              {
-                heure: "13:30",
-                heurelabel: "13:30 - 14:45",
-              },
-              {
-                heure: "14:45",
-                heurelabel: "14:45 - 16:00",
-              },
-              {
-                heure: "16:00",
-                heurelabel: "16:00 - 17:15",
-              },
-              {
-                heure: "17:15",
-                heurelabel: "17:15 - 18:30",
-              },
-            ];
+          return this.creneaux(0);
         }
       }
-      this.heureSelectionne = "12:00";
-      return [
-              {
-                heure: "12:00",
-                heurelabel: "12:00 - 13:30",
-              },
-              {
-                heure: "13:30",
-                heurelabel: "13:30 - 14:45",
-              },
-              {
-                heure: "14:45",
-                heurelabel: "14:45 - 16:00",
-              },
-              {
-                heure: "16:00",
-                heurelabel: "16:00 - 17:15",
-              },
-              {
-                heure: "17:15",
-                heurelabel: "17:15 - 18:30",
-              },
-            ];
+      return this.creneaux(0);
+    },
+
+    creneaux(val) {
+      let creneaux = [
+        {
+          heure: "12:00",
+          heurelabel: "12:00 - 13:30",
+        },
+        {
+          heure: "13:30",
+          heurelabel: "13:30 - 14:45",
+        },
+        {
+          heure: "14:45",
+          heurelabel: "14:45 - 16:00",
+        },
+        {
+          heure: "16:00",
+          heurelabel: "16:00 - 17:15",
+        },
+        {
+          heure: "17:15",
+          heurelabel: "17:15 - 18:30",
+        },
+      ];
+      this.heureSelectionne = creneaux[val].heure;
+      return creneaux.slice(val, 5);
     },
 
     allowedDates(val) {
