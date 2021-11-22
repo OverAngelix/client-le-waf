@@ -361,7 +361,6 @@ export default {
       this.informationsComplementaires = "";
       this.changeDebutDate();
       this.changeDebutCreneaux();
-      this.changeDebutDate();
       this.preReservation = true;
       this.disponibilite = false;
       this.resetReservationModel();
