@@ -58,23 +58,20 @@
                 ></v-select>
               </v-col>
               <v-col cols="12" sm="3">
-                <v-menu
-                  ref="menu"
-                  v-model="menu"
-                  :close-on-content-click="false"
+                <v-dialog
+                  ref="dialog"
+                  v-model="modal"
                   :return-value.sync="dateSelectionne"
-                  transition="scale-transition"
-                  offset-y
-                  min-width="auto"
+                  persistent
+                  width="290px"
                 >
-                  <template v-slot:activator="{ on, attrs }">
+                  <template #activator="{ on: menu }">
                     <v-text-field
                       v-model="dateFR"
                       label="Jour"
-                      readonly
-                      v-bind="attrs"
-                      v-on="on"
                       outlined
+                      readonly
+                      v-on="{ ...menu }"
                     ></v-text-field>
                   </template>
                   <v-date-picker
@@ -82,22 +79,20 @@
                     locale="fr-FR"
                     :min="new Date().toISOString().substr(0, 10)"
                     :allowed-dates="allowedDates"
-                    no-title
-                    scrollable
                   >
                     <v-spacer></v-spacer>
-                    <v-btn text color="primary" @click="menu = false">
+                    <v-btn text color="primary" @click="modal = false">
                       Annuler
                     </v-btn>
                     <v-btn
                       text
                       color="primary"
-                      @click="$refs.menu.save(dateSelectionne)"
+                      @click="$refs.dialog.save(dateSelectionne)"
                     >
                       Valider
                     </v-btn>
                   </v-date-picker>
-                </v-menu>
+                </v-dialog>
               </v-col>
               <v-col cols="12" sm="4">
                 <v-select
@@ -213,7 +208,7 @@ export default {
     ],
     nbPersonne: "",
     selectPersonne: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    menu: false,
+    modal: false,
     dateSelectionne: new Date(
       Date.now() - new Date().getTimezoneOffset() * 60000
     )
@@ -248,6 +243,16 @@ export default {
   created() {
     const heure = new Date();
     this.heureCourante = heure.getHours() * 60 * 60 + heure.getMinutes() * 60;
+    let dateDuJour = new Date(
+      Date.now() - new Date().getTimezoneOffset() * 60000
+    );
+    if (dateDuJour.getDay() == 1) {
+      dateDuJour.setDate(dateDuJour.getDate() + 2);
+      this.dateSelectionne = dateDuJour.toISOString().substr(0, 10);
+    } else if (dateDuJour.getDay() == 2) {
+      dateDuJour.setDate(dateDuJour.getDate() + 1);
+      this.dateSelectionne = dateDuJour.toISOString().substr(0, 10);
+    }
   },
 
   computed: {
@@ -269,39 +274,7 @@ export default {
       let dateDuJour = new Date(
         Date.now() - new Date().getTimezoneOffset() * 60000
       );
-      //TEMPORAIRE
-      if (this.dateSelectionne == "2021-11-19") {
-        if (dateDuJour.toISOString().substr(0, 10) == this.dateSelectionne) {
-          if (this.heureCourante < 54300) {
-            return this.creneaux(2);
-          }
-          if (this.heureCourante < 58800) {
-            return this.creneaux(3);
-          }
-          if (this.heureCourante < 63300) {
-            return this.creneaux(4);
-          }
-          if (this.heureCourante > 63300) {
-            let tomorrow = new Date(
-              Date.now() - new Date().getTimezoneOffset() * 60000
-            );
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            this.dateSelectionne = tomorrow.toISOString().substr(0, 10);
-            return this.creneaux(0);
-          }
-        }
-        return this.creneaux(2);
-      }
-      //TEMPORAIRE FIN
-      if (dateDuJour.toString().substring(0, 3) == "Mon") {
-        dateDuJour.setDate(dateDuJour.getDate() + 2);
-        this.dateSelectionne = dateDuJour.toISOString().substr(0, 10);
-      } else if (dateDuJour.toString().substring(0, 3) == "Tue") {
-        dateDuJour.setDate(dateDuJour.getDate() + 1);
-        this.dateSelectionne = dateDuJour.toISOString().substr(0, 10);
-      } else if (
-        dateDuJour.toISOString().substr(0, 10) == this.dateSelectionne
-      ) {
+      if (dateDuJour.toISOString().substr(0, 10) == this.dateSelectionne) {
         if (this.heureCourante < 46200) {
           return this.creneaux(0);
         }
@@ -322,7 +295,7 @@ export default {
             Date.now() - new Date().getTimezoneOffset() * 60000
           );
           tomorrow.setDate(tomorrow.getDate() + 1);
-          if (tomorrow.toString().substring(0, 3) == "Mon") {
+          if (tomorrow.getDay() == 1) {
             tomorrow.setDate(tomorrow.getDate() + 2);
           }
           this.dateSelectionne = tomorrow.toISOString().substr(0, 10);

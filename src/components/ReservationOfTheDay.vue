@@ -628,6 +628,16 @@ export default {
   async created() {
     const heure = new Date();
     this.heureCourante = heure.getHours() * 60 * 60 + heure.getMinutes() * 60;
+    let dateDuJour = new Date(
+      Date.now() - new Date().getTimezoneOffset() * 60000
+    );
+    if (dateDuJour.getDay() == 1) {
+      dateDuJour.setDate(dateDuJour.getDate() + 2);
+      this.dateSelectionne = dateDuJour.toISOString().substr(0, 10);
+    } else if (dateDuJour.getDay() == 2) {
+      dateDuJour.setDate(dateDuJour.getDate() + 1);
+      this.dateSelectionne = dateDuJour.toISOString().substr(0, 10);
+    }
   },
 
   mounted() {
