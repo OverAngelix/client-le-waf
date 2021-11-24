@@ -11,13 +11,25 @@
               max-width="150"
               src="https://lewaf.files.wordpress.com/2016/06/cropped-cropped-logo-petit-trans2-1-1.png"
             ></v-img>
+
+            <v-progress-linear
+              v-if="loading"
+              color="blue lighten-2"
+              indeterminate
+              rounded
+              height="6"
+              class="pa-6 mt-5"
+            ></v-progress-linear>
             <v-text-field
+              v-if="!loading"
               label="Mot de passe"
               type="password"
               v-on:keyup.enter="validePassword"
               v-model="password"
             ></v-text-field>
-            <v-btn @click="validePassword" color="primary"> Connexion </v-btn>
+            <v-btn v-if="!loading" @click="validePassword" color="primary">
+              Connexion
+            </v-btn>
           </v-card>
         </v-col>
       </v-row>
@@ -423,6 +435,7 @@ export default {
   data: () => ({
     isConnected: false,
     password: "",
+    loading: true,
     menu: false,
     reservations: [
       {
@@ -649,6 +662,7 @@ export default {
       this.validePassword();
     }
     this.loadReservations();
+    this.loading = false;
   },
 
   computed: {
