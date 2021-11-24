@@ -641,6 +641,13 @@ export default {
   },
 
   mounted() {
+    if (
+      localStorage.savePassword != "" &&
+      localStorage.savePassword !== undefined
+    ) {
+      this.password = localStorage.savePassword;
+      this.validePassword();
+    }
     this.loadReservations();
   },
 
@@ -669,6 +676,7 @@ export default {
       });
       if (result) {
         this.isConnected = true;
+        localStorage.savePassword = this.password;
       } else {
         this.$alert("Mot de passe incorrect !", "", "error");
       }
