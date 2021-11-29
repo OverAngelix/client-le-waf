@@ -660,9 +660,10 @@ export default {
     ) {
       this.password = localStorage.savePassword;
       this.validePassword();
+    } else {
+      this.loading = false;
     }
     this.loadReservations();
-    this.loading = false;
   },
 
   computed: {
@@ -688,6 +689,7 @@ export default {
       let result = await ReservationsRepository.login({
         password: this.password,
       });
+      this.loading = false;
       if (result) {
         this.isConnected = true;
         localStorage.savePassword = this.password;

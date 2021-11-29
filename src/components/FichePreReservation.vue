@@ -526,7 +526,20 @@ export default {
                 (currentDate.toISOString().substr(0, 10) ===
                   today.toISOString().substr(0, 10) ||
                   currentDate.toISOString().substr(0, 10) ===
-                    tomorrow.toISOString().substr(0, 10))
+                    tomorrow.toISOString().substr(0, 10)) &&
+                today.getDay() != 5 &&
+                today.getDay() != 6 &&
+                today.getDay() != 0
+              ) {
+                this.preReservation = false;
+                this.disponibilite = true;
+                this.idTableSelected = this.reservations[i].idTable;
+              } else if (
+                currentDate.toISOString().substr(0, 10) ===
+                  today.toISOString().substr(0, 10) &&
+                (today.getDay() == 5 ||
+                  today.getDay() == 6 ||
+                  today.getDay() == 0)
               ) {
                 this.preReservation = false;
                 this.disponibilite = true;
