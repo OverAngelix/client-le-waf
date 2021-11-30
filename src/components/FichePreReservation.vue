@@ -278,6 +278,25 @@ export default {
       var datearray = this.dateSelectionne.split("-");
       return datearray[2] + "/" + datearray[1] + "/" + datearray[0];
     },
+
+    async checkComplet() {
+      let response = await ReservationsRepository.isComplet({
+        //date: this.dateSelectionne + " 02:00:00.000",
+        date: this.dateSelectionne + " 00:00:00.000",
+      });
+      if (response["code"] == 1000) {
+        this.$alert(
+          "Veuillez ressayer ulterieurement si quelqu'un annule sa reservation, ou selectionnez un autre jour.",
+          "Attention, nous sommes complet le " + this.formatDate(),
+          "warning"
+        );
+        //return null;
+      }
+      if (response["code"] == 1001) {
+        //return response["creneaux"];
+      }
+    },
+
     changeDebutCreneaux() {
       let dateDuJour = new Date(
         Date.now() - new Date().getTimezoneOffset() * 60000
@@ -314,6 +333,7 @@ export default {
     },
 
     creneaux(val) {
+      this.checkComplet();
       let creneaux = [
         {
           heure: "12:00",
@@ -336,10 +356,31 @@ export default {
           heurelabel: "17:15 - 18:30",
         },
       ];
+      //console.log(this.differenceBetweenCreneaux(creneaux, creneauxPlein));
       this.heureSelectionne = creneaux[val].heure;
       return creneaux.slice(val, 5);
     },
 
+/*     differenceBetweenCreneaux(creneaux, creneauxPlein) {
+      const isSameUser = (creneaux, creneauxPlein) =>
+        creneaux.heure == creneauxPlein.heure &&
+        creneaux.heurelabel == creneauxPlein.heurelabel;
+
+      // Get items that only occur in the left array,
+      // using the compareFunction to determine equality.
+      const onlyInLeft = (left, right, compareFunction) =>
+        left.filter(
+          (leftValue) =>
+            !right.some((rightValue) => compareFunction(leftValue, rightValue))
+        );
+
+      const onlyInA = onlyInLeft(creneaux, creneauxPlein, isSameUser);
+      const onlyInB = onlyInLeft(creneauxPlein, creneaux, isSameUser);
+
+      const result = [...onlyInA, ...onlyInB];
+      return result;
+    },
+ */
     allowedDates(val) {
       let idxDate = new Date(val).getDay();
       //Transfoormer liste en formulaire
@@ -377,7 +418,7 @@ export default {
       if (this.disponibilite) {
         this.loading = true;
         let result = await ReservationsRepository.verificationMail({
-          //date: this.dateSelectionne + " 01:00:00.000",
+          //date: this.dateSelectionne + " 02:00:00.000",
           date: this.dateSelectionne + " 00:00:00.000",
           email: this.email,
         });
@@ -464,7 +505,7 @@ export default {
         this.loading = true;
         let reservationsDTO = await ReservationsRepository.getReservations({
           heureReservation: this.heureSelectionne,
-          //dateReservation: this.dateSelectionne + " 01:00:00.000",
+          //dateReservation: this.dateSelectionne + " 02:00:00.000",
           dateReservation: this.dateSelectionne + " 00:00:00.000",
         });
         for (let i = 0; i < reservationsDTO.length; i++) {

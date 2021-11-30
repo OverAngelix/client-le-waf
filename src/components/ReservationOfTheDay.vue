@@ -738,8 +738,8 @@ export default {
               this.loadReservations();
             } else {
               this.$alert(
-                "Probleme avec le format du nombre de personnes",
-                "Error",
+                "",
+                "Probleme avec le nombre de personnes",
                 "error"
               );
             }
