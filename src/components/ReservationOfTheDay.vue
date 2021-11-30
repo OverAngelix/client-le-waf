@@ -423,6 +423,23 @@
           </v-card>
         </v-col>
       </v-row>
+      <v-row align="center" justify="center">
+        <v-btn color="blue-grey" @click="bloque('12:00')" class="white--text">
+          12:00
+        </v-btn>
+        <v-btn color="blue-grey" @click="bloque('13:30')" class="white--text">
+          13:30
+        </v-btn>
+        <v-btn color="blue-grey" @click="bloque('14:45')" class="white--text">
+          14:45
+        </v-btn>
+        <v-btn color="blue-grey" @click="bloque('16:00')" class="white--text">
+          16:00
+        </v-btn>
+        <v-btn color="blue-grey" @click="bloque('17:15')" class="white--text">
+          17:15
+        </v-btn>
+      </v-row>
     </div>
   </v-container>
 </template>
@@ -673,6 +690,22 @@ export default {
     },
   },
   methods: {
+    bloque(creneaux) {
+      this.$confirm(
+        "Etes-vous sur de vouloir bloquer ce creneau ?",
+        "",
+        "question"
+      )
+        .then(() => {
+          for (let i = 1; i < 10; i++) {
+            this.newAutoReservation(i, creneaux);
+          }
+        })
+        .catch(() => {
+          console.log("ERROR SUPPRESSION");
+        });
+    },
+
     nextDay() {
       let tomorrow = new Date(this.dateSelectionne);
       tomorrow.setDate(tomorrow.getDate() + 1);
@@ -737,17 +770,27 @@ export default {
               });
               this.loadReservations();
             } else {
-              this.$alert(
-                "",
-                "Probleme avec le nombre de personnes",
-                "error"
-              );
+              this.$alert("", "Probleme avec le nombre de personnes", "error");
             }
           })
           .catch(() => {
             console.log("ERROR SUPPRESSION");
           });
       });
+    },
+
+    async newAutoReservation(idtable, heure) {
+      await ReservationsRepository.addReservation({
+        nom: "",
+        prenom: "BLOQUÉ",
+        email: "",
+        nbPersonne: 10,
+        informationComplementaires: "",
+        dateReservation: this.dateSelectionne,
+        idTable: idtable,
+        heureReservation: heure,
+      });
+      this.loadReservations();
     },
 
     async loadReservations() {
