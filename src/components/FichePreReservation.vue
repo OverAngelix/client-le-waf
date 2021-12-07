@@ -53,8 +53,7 @@
                       !!v || 'Vous acceptez si vous souhaitez reserver au WAF',
                   ]"
                 >
-                  <template v-slot:label>
-                    <Regles /> </template
+                  <template v-slot:label> <Regles /> </template
                 ></v-checkbox>
               </v-col>
             </v-row>
@@ -293,8 +292,8 @@ export default {
 
     async checkComplet() {
       let response = await ReservationsRepository.isComplet({
-        date: this.dateSelectionne + " 02:00:00.000",
-        //date: this.dateSelectionne + " 00:00:00.000",
+        //date: this.dateSelectionne + " 01:00:00.000",
+        date: this.dateSelectionne + " 00:00:00.000",
       });
       if (response["code"] == 1000) {
         this.$alert(
@@ -431,8 +430,8 @@ export default {
       if (this.disponibilite) {
         this.loading = true;
         let result = await ReservationsRepository.verificationMail({
-          date: this.dateSelectionne + " 02:00:00.000",
-          //date: this.dateSelectionne + " 00:00:00.000",
+          //date: this.dateSelectionne + " 01:00:00.000",
+          date: this.dateSelectionne + " 00:00:00.000",
           email: this.email,
         });
         if (result.length == 1) {
@@ -518,8 +517,8 @@ export default {
         this.loading = true;
         let reservationsDTO = await ReservationsRepository.getReservations({
           heureReservation: this.heureSelectionne,
-          dateReservation: this.dateSelectionne + " 02:00:00.000",
-          //dateReservation: this.dateSelectionne + " 00:00:00.000",
+          //dateReservation: this.dateSelectionne + " 01:00:00.000",
+          dateReservation: this.dateSelectionne + " 00:00:00.000",
         });
         for (let i = 0; i < reservationsDTO.length; i++) {
           for (let j = 0; j < this.reservations.length; j++) {
