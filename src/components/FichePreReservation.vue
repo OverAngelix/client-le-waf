@@ -361,7 +361,7 @@ export default {
       return creneaux.slice(val, 5);
     },
 
-/*     differenceBetweenCreneaux(creneaux, creneauxPlein) {
+    /*     differenceBetweenCreneaux(creneaux, creneauxPlein) {
       const isSameUser = (creneaux, creneauxPlein) =>
         creneaux.heure == creneauxPlein.heure &&
         creneaux.heurelabel == creneauxPlein.heurelabel;
@@ -389,7 +389,8 @@ export default {
         idxDate !== 2 &&
         !["2021-10-31"].includes(val) &&
         !["2021-12-24"].includes(val) &&
-        !["2021-12-25"].includes(val)
+        !["2021-12-25"].includes(val) &&
+        !["2022-01-01"].includes(val)
       );
     },
 
@@ -567,20 +568,7 @@ export default {
                 (currentDate.toISOString().substr(0, 10) ===
                   today.toISOString().substr(0, 10) ||
                   currentDate.toISOString().substr(0, 10) ===
-                    tomorrow.toISOString().substr(0, 10)) &&
-                today.getDay() != 5 &&
-                today.getDay() != 6 &&
-                today.getDay() != 0
-              ) {
-                this.preReservation = false;
-                this.disponibilite = true;
-                this.idTableSelected = this.reservations[i].idTable;
-              } else if (
-                currentDate.toISOString().substr(0, 10) ===
-                  today.toISOString().substr(0, 10) &&
-                (today.getDay() == 5 ||
-                  today.getDay() == 6 ||
-                  today.getDay() == 0)
+                    tomorrow.toISOString().substr(0, 10))
               ) {
                 this.preReservation = false;
                 this.disponibilite = true;
