@@ -45,6 +45,18 @@
                   label="Informations complementaires"
                 ></v-select>
               </v-col>
+              <v-col cols="12" sm="12" md="12">
+                <v-checkbox
+                  v-model="regle"
+                  :rules="[
+                    (v) =>
+                      !!v || 'Vous acceptez si vous souhaitez reserver au WAF',
+                  ]"
+                >
+                  <template v-slot:label>
+                    <Regles /> </template
+                ></v-checkbox>
+              </v-col>
             </v-row>
             <v-row v-if="preReservation">
               <v-col cols="12" sm="5">
@@ -107,11 +119,6 @@
             </v-row>
           </v-container>
           <small
-            >Rappel : Il s'agit de creneaux 1h15 hormis le creneaux de 12h à
-            13h30</small
-          >
-          <br />
-          <small
             >En cas de questions concernant les reservations, contacter
             <a href="mailto:marine@lewaf.fr">nous</a>
           </small>
@@ -134,13 +141,18 @@
 </template>
 
 <script>
+import Regles from "../components/Regles";
 import ReservationsRepository from "@/API/ReservationsRepository";
 export default {
   name: "FichePreReservation",
+  components: {
+    Regles,
+  },
   data: () => ({
     dialog: false,
     preReservation: true,
     disponibilite: false,
+    regle: false,
     reservations: [
       {
         idTable: 1,
@@ -281,8 +293,8 @@ export default {
 
     async checkComplet() {
       let response = await ReservationsRepository.isComplet({
-        //date: this.dateSelectionne + " 02:00:00.000",
-        date: this.dateSelectionne + " 00:00:00.000",
+        date: this.dateSelectionne + " 02:00:00.000",
+        //date: this.dateSelectionne + " 00:00:00.000",
       });
       if (response["code"] == 1000) {
         this.$alert(
@@ -419,8 +431,8 @@ export default {
       if (this.disponibilite) {
         this.loading = true;
         let result = await ReservationsRepository.verificationMail({
-          //date: this.dateSelectionne + " 02:00:00.000",
-          date: this.dateSelectionne + " 00:00:00.000",
+          date: this.dateSelectionne + " 02:00:00.000",
+          //date: this.dateSelectionne + " 00:00:00.000",
           email: this.email,
         });
         if (result.length == 1) {
@@ -506,8 +518,8 @@ export default {
         this.loading = true;
         let reservationsDTO = await ReservationsRepository.getReservations({
           heureReservation: this.heureSelectionne,
-          //dateReservation: this.dateSelectionne + " 02:00:00.000",
-          dateReservation: this.dateSelectionne + " 00:00:00.000",
+          dateReservation: this.dateSelectionne + " 02:00:00.000",
+          //dateReservation: this.dateSelectionne + " 00:00:00.000",
         });
         for (let i = 0; i < reservationsDTO.length; i++) {
           for (let j = 0; j < this.reservations.length; j++) {
