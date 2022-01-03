@@ -29,6 +29,9 @@
         <br />
         - Je laisse les chiens se reposer lorsqu'ils dorment et je ne porte
         jamais les chiens dans mes bras
+        <br />
+        - Suite aux nouvelles consignes sanitaires, je porte mon masque lors des
+        deplacements dans le WAF
       </v-card-text>
 
       <v-divider></v-divider>

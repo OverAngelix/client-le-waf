@@ -285,6 +285,7 @@ export default {
         this.dateSelectionne = dateDuJour.toISOString().substr(0, 10);
       }
     },
+
     formatDate() {
       var datearray = this.dateSelectionne.split("-");
       return datearray[2] + "/" + datearray[1] + "/" + datearray[0];
@@ -393,15 +394,11 @@ export default {
     },
  */
     allowedDates(val) {
-      let idxDate = new Date(val).getDay();
+     let idxDate = new Date(val).getDay();
       //Transfoormer liste en formulaire
       return (
         idxDate !== 1 &&
-        idxDate !== 2 &&
-        !["2021-10-31"].includes(val) &&
-        !["2021-12-24"].includes(val) &&
-        !["2021-12-25"].includes(val) &&
-        !["2022-01-01"].includes(val)
+        idxDate !== 2
       );
     },
 
