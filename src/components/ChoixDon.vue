@@ -7,7 +7,7 @@
           contain
           class="rounded-card ma-1 img-border"
           max-height="150"
-          max-width="150"
+          max-width="200"
           :src="require(`@/assets/don.png`)"
         ></v-img>
       </span>
