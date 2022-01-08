@@ -42,7 +42,7 @@
           contain
           max-height="400"
           max-width="400"
-          src="https://lewaf.files.wordpress.com/2019/03/capture-de28099c3a9cran-2019-03-28-c3a0-17.33.15.png"
+          :src="require(`@/assets/Lana.png`)"
         ></v-img>
 
         <v-divider></v-divider>
@@ -67,7 +67,7 @@
           contain
           max-height="400"
           max-width="400"
-          src="https://lewaf.files.wordpress.com/2019/03/capture-de28099ecc81cran-2019-03-07-acc80-08.54.06.png"
+          :src="require(`@/assets/Oddy.png`)"
         ></v-img>
 
         <v-divider></v-divider>
@@ -94,7 +94,8 @@
           contain
           max-height="400"
           max-width="400"
-          src="https://lewaf.files.wordpress.com/2019/02/capture-de28099ecc81cran-2019-02-09-acc80-12.05.59.png"
+          s
+          :src="require(`@/assets/Nala.png`)"
         ></v-img>
 
         <v-divider></v-divider>
@@ -130,7 +131,7 @@
           contain
           max-height="400"
           max-width="400"
-          src="https://lewaf.files.wordpress.com/2018/12/48416949_950666855130945_8257791856033660928_n.jpg"
+          :src="require(`@/assets/Gyps.jpg`)"
         ></v-img>
 
         <v-divider></v-divider>
@@ -179,7 +180,7 @@
           contain
           max-height="400"
           max-width="400"
-          src="https://lewaf.files.wordpress.com/2018/11/titi.jpg"
+          :src="require(`@/assets/titi.jpg`)"
         ></v-img>
 
         <v-divider></v-divider>
@@ -223,7 +224,7 @@
           contain
           max-height="400"
           max-width="400"
-          src="https://lewaf.files.wordpress.com/2018/11/coolio.jpg"
+          :src="require(`@/assets/coolio.jpg`)"
         ></v-img>
 
         <v-divider></v-divider>
@@ -261,7 +262,7 @@
             contain
             max-height="400"
             max-width="400"
-            src="https://lewaf.files.wordpress.com/2018/10/43534283_914196438777987_3525515018634264576_n.jpg"
+            :src="require(`@/assets/Engie.jpg`)"
           ></v-img>
         </p>
 
@@ -292,7 +293,7 @@
           contain
           max-height="400"
           max-width="400"
-          src="https://lewaf.files.wordpress.com/2018/11/capture-d_ecc81cran-2018-11-04-acc80-12-38-04.png"
+          :src="require(`@/assets/cannelle.png`)"
         ></v-img>
 
         <v-divider></v-divider>
@@ -328,7 +329,7 @@
           contain
           max-height="400"
           max-width="400"
-          src="https://lewaf.files.wordpress.com/2018/10/44191135_909979469199684_6864104792734564352_n.jpg"
+          :src="require(`@/assets/moka.jpg`)"
         ></v-img> </v-col
     ></v-row>
   </v-container>

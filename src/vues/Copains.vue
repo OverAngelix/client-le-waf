@@ -11,10 +11,10 @@
           >
         </p>
         <img
-          src="https://www.philosophie-canine.com/wp-content/uploads/2021/06/logo.svg"
+         :src="require(`@/assets/canine.png`)"
           alt="Capture d_écran 2018-11-23 à 12.34.32"
-          width="255"
-          height="118"
+          width="185"
+          height="185"
         />
 
         <v-divider></v-divider>
@@ -31,7 +31,7 @@
         </p>
 
         <img
-          src="https://scontent-cdg2-1.xx.fbcdn.net/v/t1.6435-9/120530885_773577256521952_2609871921655302846_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=A0A92d0c1T0AX_iu-XK&_nc_ht=scontent-cdg2-1.xx&oh=bdf54bac98e147323a07e84c0acff80d&oe=61A9EDE0"
+         :src="require(`@/assets/TcoLeers.jpg`)"
           alt="toutoulys logo.png"
           width="200"
           height="200"
@@ -49,9 +49,9 @@
         <v-img
           alt="184 fondateurs"
           contain
-          max-height="642"
-          max-width="800"
-          src="https://lewaf.files.wordpress.com/2017/03/13909199_508252772705691_1786022416806087443_o-1.jpg"
+          max-height="542"
+          max-width="600"
+          :src="require(`@/assets/leWaf.jpg`)"
         ></v-img>
         <p>
           Merci les copains, sans vous on n&rsquo;en serait pas là

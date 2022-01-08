@@ -16,7 +16,7 @@
           contain
           max-height="400"
           max-width="500"
-          src="https://lewaf.files.wordpress.com/2018/12/capture-d_ecc81cran-2018-12-02-acc80-10-38-46.png"
+          :src="require(`@/assets/lesbarsanimaux.png`)"
         ></v-img>
 
         <v-divider></v-divider>
@@ -35,7 +35,7 @@
             contain
             max-height="400"
             max-width="500"
-            src="https://lewaf.files.wordpress.com/2018/12/capture-d_ecc81cran-2018-12-02-acc80-11-14-12.png"
+            :src="require(`@/assets/uneJourneeAuWaf.png`)"
           ></v-img
         ></a>
 
@@ -57,7 +57,7 @@
             contain
             max-height="400"
             max-width="500"
-            src="https://lewaf.files.wordpress.com/2018/10/capture-d_ecc81cran-2018-10-20-acc80-17-08-52.png"
+            :src="require(`@/assets/GrandLille.png`)"
           ></v-img
         ></a>
 
@@ -75,7 +75,7 @@
           contain
           max-height="400"
           max-width="500"
-          src="https://lewaf.files.wordpress.com/2018/10/capture-d_ecc81cran-2018-10-20-acc80-16-55-34.png"
+           :src="require(`@/assets/GarderiePourChien.png`)"
         ></v-img>
 
         <v-divider></v-divider>
@@ -99,7 +99,7 @@
             contain
             max-height="400"
             max-width="500"
-            src="https://lewaf.files.wordpress.com/2018/10/capture-d_ecc81cran-2018-10-20-acc80-14-43-52.png"
+             :src="require(`@/assets/Vozer.png`)"
           ></v-img
         ></a>
 
@@ -135,7 +135,7 @@
             contain
             max-height="400"
             max-width="500"
-            src="https://lewaf.files.wordpress.com/2018/10/capture-d_ecc81cran-2018-10-20-acc80-15-42-37.png"
+            :src="require(`@/assets/Cosmo.png`)"
           ></v-img
         ></a>
 
@@ -158,7 +158,7 @@
             contain
             max-height="400"
             max-width="500"
-            src="https://lewaf.files.wordpress.com/2018/10/capture-d_ecc81cran-2018-10-20-acc80-14-32-02.png"
+           :src="require(`@/assets/Actu.png`)"
           ></v-img
         ></a>
 
@@ -181,7 +181,7 @@
             contain
             max-height="400"
             max-width="500"
-            src="https://lewaf.files.wordpress.com/2018/10/capture-d_ecc81cran-2018-10-20-acc80-14-44-25.png"
+            :src="require(`@/assets/FemmeActuelle.png`)"
           ></v-img
         ></a>
 
@@ -204,7 +204,7 @@
             contain
             max-height="400"
             max-width="500"
-            src="https://lewaf.files.wordpress.com/2018/10/capture-d_ecc81cran-2018-10-20-acc80-15-57-161.png"
+           :src="require(`@/assets/marieClaire.png`)"
           ></v-img
         ></a>
 
@@ -225,7 +225,7 @@
             contain
             max-height="400"
             max-width="500"
-            src="https://lewaf.files.wordpress.com/2018/10/capture-d_ecc81cran-2018-10-20-acc80-16-08-08.png"
+            :src="require(`@/assets/Bonbon.png`)"
           ></v-img
         ></a>
 
@@ -247,7 +247,7 @@
             contain
             max-height="400"
             max-width="500"
-            src="https://lewaf.files.wordpress.com/2018/10/capture-d_ecc81cran-2018-10-20-acc80-15-26-14.png"
+            :src="require(`@/assets/LePoint.png`)"
           ></v-img
         ></a>
 
@@ -269,7 +269,7 @@
             contain
             max-height="400"
             max-width="500"
-            src="https://lewaf.files.wordpress.com/2018/10/capture-d_ecc81cran-2018-10-20-acc80-15-29-57.png"
+            :src="require(`@/assets/Woopets.png`)"
           ></v-img
         ></a>
 
@@ -289,7 +289,7 @@
             contain
             max-height="400"
             max-width="500"
-            src="https://lewaf.files.wordpress.com/2018/10/capture-d_ecc81cran-2018-10-20-acc80-16-05-22.png"
+            :src="require(`@/assets/Wamiz.png`)"
           ></v-img
         ></a>
 
@@ -313,7 +313,7 @@
             contain
             max-height="400"
             max-width="500"
-            src="https://lewaf.files.wordpress.com/2018/10/capture-d_ecc81cran-2018-10-20-acc80-15-06-38.png"
+            :src="require(`@/assets/parisien.png`)"
           ></v-img
         ></a>
 
@@ -336,7 +336,7 @@
             contain
             max-height="400"
             max-width="500"
-            src="https://lewaf.files.wordpress.com/2018/10/capture-d_ecc81cran-2018-10-20-acc80-14-37-041.png"
+           :src="require(`@/assets/eucalyptus.png`)"
           ></v-img
         ></a>
 
@@ -359,7 +359,7 @@
             contain
             max-height="400"
             max-width="500"
-            src="https://lewaf.files.wordpress.com/2018/10/capture-d_ecc81cran-2018-10-20-acc80-16-11-23.png"
+            :src="require(`@/assets/contactFM.png`)"
           ></v-img
         ></a>
 
@@ -382,7 +382,7 @@
             contain
             max-height="400"
             max-width="500"
-            src="https://lewaf.files.wordpress.com/2018/10/capture-d_ecc81cran-2018-10-20-acc80-15-39-36.png"
+            :src="require(`@/assets/FranceBleu.png`)"
           ></v-img>
         </a> </v-col
     ></v-row>

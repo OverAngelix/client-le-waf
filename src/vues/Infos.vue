@@ -100,7 +100,7 @@
             target="_blank"
             rel="noopener noreferrer"
             ><img
-              src="https://lewaf.files.wordpress.com/2016/06/face.png"
+              :src="require(`@/assets/face.png`)"
               alt="face"
               width="169"
               height="47"
@@ -125,9 +125,9 @@
         <v-img
           alt="MENU"
           contain
-          max-height="824"
-          max-width="985"
-          src="https://lewaf.files.wordpress.com/2021/07/menu.jpg"
+          max-height="546"
+          max-width="700"
+          :src="require(`@/assets/carte.jpg`)"
         ></v-img>
         <br />
         <v-img
@@ -135,7 +135,7 @@
           contain
           max-height="400"
           max-width="400"
-          src="https://lewaf.files.wordpress.com/2018/11/capture-d_ecc81cran-2018-11-08-acc80-13-56-39.png"
+          :src="require(`@/assets/trip.png`)"
         ></v-img>
       </v-col>
     </v-row>

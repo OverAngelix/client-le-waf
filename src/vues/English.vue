@@ -20,7 +20,7 @@
           contain
           max-height="600"
           max-width="800"
-          src="https://lewaf.files.wordpress.com/2018/10/42634055_252852472087118_5414711617059291136_n.jpg"
+          :src="require(`@/assets/girlsDogs.jpg`)"
         ></v-img>
         <p>
           Then, we have 2 to 3 dogs that are for adoption. They are dogs that
@@ -43,7 +43,7 @@
           contain
           max-height="600"
           max-width="600"
-          src="https://lewaf.files.wordpress.com/2016/11/gateaux.png"
+          :src="require(`@/assets/gateaux.png`)"
         ></v-img>
         <p>
           <strong>Yey! Where can I find you?</strong>
@@ -54,7 +54,7 @@
           contain
           max-height="424"
           max-width="600"
-          src="https://lewaf.files.wordpress.com/2019/01/50314708_382039262361605_1116384771870556160_n-e1548925456396.jpg"
+          :src="require(`@/assets/fluffyDog.jpg`)"
         ></v-img>
       </v-col>
     </v-row>

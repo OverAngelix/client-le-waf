@@ -16,7 +16,7 @@
         - Je ne nourris pas les chiens en dehors des distributions de friandises
         réalisées par le waf
         <br />
-        - Je prends connaissance que le buffet de 7€ est facturé en cas de
+        - Je prends connaissance que le buffet de 8€ est facturé en cas de
         non-consommation et qu'il s'agit de creneaux 1h15 hormis le creneaux de
         12h à 13h30
         <br />

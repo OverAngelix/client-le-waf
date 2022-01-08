@@ -27,9 +27,9 @@
         <v-img
           alt="MENU"
           contain
-          max-height="424"
-          max-width="600"
-          src="https://lewaf.files.wordpress.com/2021/07/menu.jpg"
+          max-height="568"
+          max-width="700"
+          :src="require(`@/assets/carte.jpg`)"
         ></v-img>
 
         <p>
@@ -158,7 +158,7 @@
           contain
           max-height="309"
           max-width="685"
-          src="https://lewaf.files.wordpress.com/2016/11/gateaux.png"
+          :src="require(`@/assets/gateaux.png`)"
         ></v-img>
 
         <v-divider></v-divider>
@@ -184,7 +184,7 @@
           contain
           max-height="470"
           max-width="350"
-          src="https://lewaf.files.wordpress.com/2019/07/59869390_1033762840154679_6573515495989837824_n.jpg"
+          :src="require(`@/assets/bibi.jpg`)"
         ></v-img>
         <br />
 
@@ -209,7 +209,7 @@
           contain
           max-height="470"
           max-width="350"
-          src="https://lewaf.files.wordpress.com/2019/07/65026038_1064507737080189_1007695371700273152_o.jpg"
+          :src="require(`@/assets/Pat.jpg`)"
         ></v-img>
         <br />
 
@@ -232,7 +232,7 @@
           contain
           max-height="470"
           max-width="350"
-          src="https://lewaf.files.wordpress.com/2018/12/48416949_950666855130945_8257791856033660928_n.jpg?w=283"
+          :src="require(`@/assets/Gyps.jpg`)"
         ></v-img>
         <br />
 
@@ -251,7 +251,7 @@
           contain
           max-height="470"
           max-width="350"
-          src="https://lewaf.files.wordpress.com/2019/07/67244976_518658518875136_1655078321962090496_n.jpg"
+          :src="require(`@/assets/Djo.jpg`)"
         ></v-img>
       </v-col>
     </v-row>
@@ -267,22 +267,6 @@ export default {
     FichePreReservation,
     TitleMenu,
   },
-  data: () => ({
-    doggos: [
-      {
-        src: require("../assets/beans.jpg"),
-      },
-      {
-        src: require("../assets/patate.jpg"),
-      },
-      {
-        src: require("../assets/gypsie.jpg"),
-      },
-      {
-        src: require("../assets/jo.jpg"),
-      },
-    ],
-  }),
 };
 </script>
 
