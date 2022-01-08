@@ -327,7 +327,7 @@
           </strong>
         </h2>
         <a
-          href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=8&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwjGm4eDjZXeAhXSyIUKHUN-D6MQFjAHegQIARAB&amp;url=https%3A%2F%2Feucalyptuseater.wordpress.com%2F2016%2F11%2F23%2Fjai-teste-le-waf-cafe-chiens-a-lille%2F&amp;usg=AOvVaw0Qno4VQe1nENXzyDcSb-38"
+          href="https://eucalyptuseater.wordpress.com/2016/11/23/jai-teste-le-waf-cafe-chiens-a-lille/"
           target="_blank"
           rel="noopener"
         >
