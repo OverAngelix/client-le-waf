@@ -15,6 +15,7 @@
           </v-row>
         </v-img>
 
+        <ChoixDon></ChoixDon>
         <p>
           <strong
             ><span style="color: #ff6600"
@@ -33,7 +34,7 @@
         ></v-img>
 
         <p>
-          Au Waf, c&rsquo;est un buffet de boissons a volonté ! Alors faites
+          Au Waf, c&rsquo;est un buffet de boissons à volonté ! Alors faites
           comme à la maison et servez vous!
         </p>
         <p>
@@ -48,18 +49,18 @@
         <h3>
           <strong style="color: #ff0000">
             Le weekend nous sommes rapidement complets ! Donc n'hesitez pas à
-            vite reserver (créneaux de 1H15 par réservation).
+            vite réserver (créneaux de 1H15 par réservation).
           </strong>
         </h3>
         <p>
-          Quotidiennement, en moyenne 6 chiens en moyenne font une balade de
-          1h30 avant de venir passer la journée affalés sur les canapés à
-          attendre des câlins et à réclamer pour jouer à la balle. Parfois, ils
-          volent votre déjeuner ou se bagarre tout en discrétion à côté de
-          vous&#8230;. Parmi eux, certains sont des chiens abandonnés dont nous
-          nous occupons le temps de leur trouver une super famille pour la vie.
-          Les autres sont des chiens permanents ou qui viennent s&rsquo;éclater
-          en garderie pendant que leurs parents travaillent.
+          Quotidiennement, en moyenne 6 chiens font une balade de 1h30 avant de
+          venir passer la journée affalés sur les canapés à attendre des câlins
+          et à réclamer pour jouer à la balle. Parfois, ils volent votre
+          déjeuner ou se bagarrent tout en discrétion à côté de vous&#8230;.
+          Parmi eux, certains sont des chiens abandonnés dont nous nous occupons
+          le temps de leur trouver une super famille pour la vie. Les autres
+          sont des chiens permanents ou qui viennent s&rsquo;éclater en garderie
+          pendant que leurs parents travaillent.
         </p>
 
         <div class="frameResponsive">
@@ -260,12 +261,14 @@
 
 <script>
 import FichePreReservation from "../components/FichePreReservation";
+import ChoixDon from "../components/ChoixDon";
 import TitleMenu from "../components/TitleMenu";
 export default {
   name: "Accueil",
   components: {
     FichePreReservation,
     TitleMenu,
+    ChoixDon,
   },
 };
 </script>
