@@ -33,7 +33,7 @@
         ></a>
 
         <a
-          href="https://buy.stripe.com/bIY5kX0nY6qGcI84gh"
+          href="https://buy.stripe.com/5kA7t54Ee4iybE4cMO"
           target="_blank"
           rel="noopener"
         >
@@ -48,7 +48,7 @@
         ></a>
 
         <a
-          href="https://buy.stripe.com/bIY5kX0nY6qGcI84gh"
+          href="https://buy.stripe.com/bIY8x97Qqg1g6jK4gg"
           target="_blank"
           rel="noopener"
         >
