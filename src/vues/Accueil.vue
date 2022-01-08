@@ -91,7 +91,7 @@
         </p>
         <p>
           Depuis la création du Waf, il y a 5 ans, plus de
-          <span style="color: #ff0000"><strong>90 chiens</strong></span>
+          <span style="color: #ff0000"><strong>100 chiens</strong></span>
           ont foulé notre sol et participé à nos balades avant de trouver un
           foyer aimant !
         </p>
