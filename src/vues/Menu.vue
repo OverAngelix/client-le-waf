@@ -7,7 +7,7 @@
           contain
           max-height="150"
           max-width="150"
-          src="https://lewaf.files.wordpress.com/2016/06/cropped-cropped-logo-petit-trans2-1-1.png"
+          :src="require(`@/assets/logoMenu.png`)"
         ></v-img>
       </v-card-title>
 

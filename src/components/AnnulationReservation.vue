@@ -8,7 +8,7 @@
             contain
             max-height="150"
             max-width="150"
-            src="https://lewaf.files.wordpress.com/2016/06/cropped-cropped-logo-petit-trans2-1-1.png"
+            :src="require(`@/assets/logoMenu.png`)"
           ></v-img>
         </v-card-title>
 
@@ -39,22 +39,6 @@
 import ReservationsRepository from "@/API/ReservationsRepository";
 export default {
   name: "AnnulationReservation",
-  data: () => ({
-    doggos: [
-      {
-        src: require("../assets/beans.jpg"),
-      },
-      {
-        src: require("../assets/patate.jpg"),
-      },
-      {
-        src: require("../assets/gypsie.jpg"),
-      },
-      {
-        src: require("../assets/jo.jpg"),
-      },
-    ],
-  }),
 
   methods: {
     async confirmationAnnulation() {
