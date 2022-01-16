@@ -314,22 +314,22 @@ export default {
         Date.now() - new Date().getTimezoneOffset() * 60000
       );
       if (dateDuJour.toISOString().substr(0, 10) == this.dateSelectionne) {
-        if (this.heureCourante < 46200) {
+        if (this.heureCourante < 45600) { //12h50
           return this.creneaux(0);
         }
-        if (this.heureCourante < 49800) {
+        if (this.heureCourante < 50700) { //14h05
           return this.creneaux(1);
         }
-        if (this.heureCourante < 54300) {
+        if (this.heureCourante < 54900) { //15h15
           return this.creneaux(2);
         }
-        if (this.heureCourante < 58800) {
+        if (this.heureCourante < 59400) { //16h30
           return this.creneaux(3);
         }
-        if (this.heureCourante < 63300) {
+        if (this.heureCourante < 63900) { //17h30
           return this.creneaux(4);
         }
-        if (this.heureCourante > 63300) {
+        if (this.heureCourante > 63900) {
           let tomorrow = new Date(
             Date.now() - new Date().getTimezoneOffset() * 60000
           );
