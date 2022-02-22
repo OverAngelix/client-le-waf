@@ -56,6 +56,55 @@
                   <template v-slot:label> <Regles /> </template
                 ></v-checkbox>
               </v-col>
+              <v-col cols="12" sm="12" md="12">
+                <v-checkbox
+                  v-model="repas"
+                  label="Formule(s) Sandwich(s) ou Quiche(s) ?"
+                ></v-checkbox>
+                <v-expand-transition>
+                  <v-card
+                    v-show="repas"
+                    height="auto"
+                    width="auto"
+                    class="mx-auto pa-2 secondary"
+                  >
+                    <v-row align="start" justify="start">
+                      <v-col cols="12" sm="3" md="3">
+                        <div>Sandwich(s) :</div>
+                      </v-col>
+                      <v-col cols="12" sm="9" md="9">
+                        <v-btn class="mx-2" fab dark small color="primary">
+                          <v-icon @click="ChangeSandwichs(-1)" dark>
+                            mdi-minus
+                          </v-icon>
+                        </v-btn>
+                        {{ nbSandwish }}
+                        <v-btn class="mx-2" fab dark small color="primary">
+                          <v-icon @click="ChangeSandwichs(+1)" dark>
+                            mdi-plus
+                          </v-icon>
+                        </v-btn>
+                      </v-col>
+                      <v-col cols="12" sm="3" md="3">
+                        <div>Quiche(s) :</div>
+                      </v-col>
+                      <v-col cols="12" sm="9" md="9">
+                        <v-btn class="mx-2" fab dark small color="primary">
+                          <v-icon @click="ChangeQuiches(-1)" dark>
+                            mdi-minus
+                          </v-icon>
+                        </v-btn>
+                        {{ nbQuiches }}
+                        <v-btn class="mx-2" fab dark small color="primary">
+                          <v-icon @click="ChangeQuiches(+1)" dark>
+                            mdi-plus
+                          </v-icon>
+                        </v-btn>
+                      </v-col>
+                    </v-row>
+                  </v-card>
+                </v-expand-transition>
+              </v-col>
             </v-row>
             <v-row v-if="preReservation">
               <v-col cols="12" sm="5">
@@ -152,6 +201,9 @@ export default {
     preReservation: true,
     disponibilite: false,
     regle: false,
+    repas: false,
+    nbSandwish: 0,
+    nbQuiches: 0,
     reservations: [
       {
         idTable: 1,
@@ -260,6 +312,15 @@ export default {
     this.changeDebutDate();
   },
 
+  watch: {
+    repas: function (val) {
+      if (!val) {
+        this.nbSandwish = 0;
+        this.nbQuiches = 0;
+      }
+    },
+  },
+
   computed: {
     dateFR() {
       return this.formatDate();
@@ -271,6 +332,18 @@ export default {
   },
 
   methods: {
+    ChangeQuiches(val) {
+      if (this.nbQuiches + val >= 0) {
+        this.nbQuiches += val;
+      }
+    },
+
+    ChangeSandwichs(val) {
+      if (this.nbSandwish + val >= 0) {
+        this.nbSandwish += val;
+      }
+    },
+
     changeDebutDate() {
       let dateDuJour = new Date(
         Date.now() - new Date().getTimezoneOffset() * 60000
@@ -314,19 +387,24 @@ export default {
         Date.now() - new Date().getTimezoneOffset() * 60000
       );
       if (dateDuJour.toISOString().substr(0, 10) == this.dateSelectionne) {
-        if (this.heureCourante < 45600) { //12h50
+        if (this.heureCourante < 45600) {
+          //12h50
           return this.creneaux(0);
         }
-        if (this.heureCourante < 50700) { //14h05
+        if (this.heureCourante < 50700) {
+          //14h05
           return this.creneaux(1);
         }
-        if (this.heureCourante < 54900) { //15h15
+        if (this.heureCourante < 54900) {
+          //15h15
           return this.creneaux(2);
         }
-        if (this.heureCourante < 59400) { //16h30
+        if (this.heureCourante < 59400) {
+          //16h30
           return this.creneaux(3);
         }
-        if (this.heureCourante < 63900) { //17h30
+        if (this.heureCourante < 63900) {
+          //17h30
           return this.creneaux(4);
         }
         if (this.heureCourante > 63900) {
@@ -394,12 +472,9 @@ export default {
     },
  */
     allowedDates(val) {
-     let idxDate = new Date(val).getDay();
+      let idxDate = new Date(val).getDay();
       //Transfoormer liste en formulaire
-      return (
-        idxDate !== 1 &&
-        idxDate !== 2
-      );
+      return idxDate !== 1 && idxDate !== 2;
     },
 
     closeModal() {
@@ -408,6 +483,9 @@ export default {
       this.prenom = "";
       this.idTableSelected = -1;
       this.email = "";
+      this.nbSandwish = 0;
+      this.nbQuiches = 0;
+      this.repas = false;
       this.informationsComplementaires = "";
       this.changeDebutDate();
       this.changeDebutCreneaux();
@@ -459,6 +537,8 @@ export default {
                   dateReservation: this.dateSelectionne,
                   idTable: this.idTableSelected,
                   heureReservation: this.heureSelectionne,
+                  nbSandwichs: this.nbSandwish,
+                  nbQuiches: this.nbQuiches,
                 });
                 this.$alert(
                   "La reservation au nom de " +
@@ -495,6 +575,8 @@ export default {
             dateReservation: this.dateSelectionne,
             idTable: this.idTableSelected,
             heureReservation: this.heureSelectionne,
+            nbSandwichs: this.nbSandwish,
+            nbQuiches: this.nbQuiches,
           });
           this.$alert(
             "La reservation au nom de " +

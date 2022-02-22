@@ -21,7 +21,6 @@
         <v-tab-item v-for="item in items" :key="item">
           <Accueil v-if="item == `ACCUEIL`" />
           <Infos v-if="item == `INFOS PRATIQUES`" />
-          <LesAdoptes v-if="item == `WAF À L’ADOPTION`" />
           <Adoption v-if="item == `L’ADOPTION`" />
           <Presse v-if="item == `ON PARLE DU WAF !`" />
           <Copains v-if="item == `LES COPAINS DU WAF`" />
@@ -74,7 +73,6 @@
 <script>
 import Accueil from "./Accueil";
 import Infos from "./Infos";
-import LesAdoptes from "./LesAdoptes";
 import Adoption from "./Adoption";
 import Presse from "./Presse";
 import Copains from "./Copains";
@@ -83,7 +81,6 @@ export default {
   components: {
     Accueil,
     Infos,
-    LesAdoptes,
     Adoption,
     Presse,
     Copains,
@@ -95,7 +92,6 @@ export default {
     items: [
       "ACCUEIL",
       "INFOS PRATIQUES",
-      "WAF À L’ADOPTION",
       "L’ADOPTION",
       "ON PARLE DU WAF !",
       "LES COPAINS DU WAF",

@@ -76,6 +76,20 @@
           mdi-arrow-right-bold</v-icon
         >
       </v-row>
+
+      <v-row align="center" justify="center">
+        <v-card class="mx-auto" max-width="344">
+          <v-card-text>
+            <div>QUICHES : {{ totalQuiches }}</div>
+          </v-card-text>
+        </v-card>
+        <v-card class="mx-auto" max-width="344">
+          <v-card-text>
+            <div>SANDWICHS : {{ totalSandwichs }}</div>
+          </v-card-text>
+        </v-card>
+      </v-row>
+
       <v-row align="center" justify="center">
         <v-col
           cols="12"
@@ -423,6 +437,7 @@
           </v-card>
         </v-col>
       </v-row>
+
       <v-row align="center" justify="center">
         <v-btn color="blue-grey" @click="bloque('12:00')" class="white--text">
           12:00
@@ -454,6 +469,8 @@ export default {
     password: "",
     loading: true,
     menu: false,
+    totalQuiches: 0,
+    totalSandwichs: 0,
     reservations: [
       {
         idTable: 1,
@@ -767,6 +784,8 @@ export default {
                 dateReservation: this.dateSelectionne,
                 idTable: idtable,
                 heureReservation: heure,
+                nbQuiches: 0,
+                nbSandwichs: 0,
               });
               this.loadReservations();
             } else {
@@ -814,8 +833,12 @@ export default {
         this.reservations[j].valide3 = false;
         this.reservations[j].valide4 = false;
         this.reservations[j].valide5 = false;
+        this.totalQuiches = 0;
+        this.totalSandwichs = 0;
       }
       for (let i = 0; i < reservationsDTO.length; i++) {
+        this.totalQuiches += reservationsDTO[i].nbQuiches;
+        this.totalSandwichs += reservationsDTO[i].nbSandwichs;
         for (let j = 0; j < this.reservations.length; j++) {
           if (reservationsDTO[i].idTable == this.reservations[j].idTable) {
             switch (reservationsDTO[i].heureReservation) {
