@@ -366,7 +366,7 @@ export default {
 
     async checkComplet() {
       let response = await ReservationsRepository.isComplet({
-        //date: this.dateSelectionne + " 01:00:00.000",
+        //date: this.dateSelectionne + " 02:00:00.000",
         date: this.dateSelectionne + " 00:00:00.000",
       });
       if (response["code"] == 1000) {
@@ -505,7 +505,7 @@ export default {
       if (this.disponibilite) {
         this.loading = true;
         let result = await ReservationsRepository.verificationMail({
-          //date: this.dateSelectionne + " 01:00:00.000",
+          // date: this.dateSelectionne + " 02:00:00.000",
           date: this.dateSelectionne + " 00:00:00.000",
           email: this.email,
         });
@@ -518,7 +518,7 @@ export default {
             );
           } else {
             this.$confirm(
-              `Vous avez deja un reservation ce jour à ${result[0].heureReservation.substring(
+              `Vous avez deja une reservation ce jour à ${result[0].heureReservation.substring(
                 0,
                 5
               )} avec ${
@@ -592,11 +592,12 @@ export default {
           this.loading = false;
           this.closeModal();
         }
+
       } else {
         this.loading = true;
         let reservationsDTO = await ReservationsRepository.getReservations({
           heureReservation: this.heureSelectionne,
-          //dateReservation: this.dateSelectionne + " 01:00:00.000",
+          // dateReservation: this.dateSelectionne + " 02:00:00.000",
           dateReservation: this.dateSelectionne + " 00:00:00.000",
         });
         for (let i = 0; i < reservationsDTO.length; i++) {
@@ -633,7 +634,20 @@ export default {
             nbReservationCanape++;
           }
         }
+
+
+        /*
+        3 groupes de 2
+        1 groupe de 2 et un groupe de 3
+        2 groupes de 3
+       */
         if (nbReservationCanape == 1 && !isResa && this.nbPersonne <= 3) {
+          this.preReservation = false;
+          this.disponibilite = true;
+          this.idTableSelected = 6;
+          isResa = true;
+        }
+        if (nbReservationCanape == 2 && !isResa && this.nbPersonne <= 2) {
           this.preReservation = false;
           this.disponibilite = true;
           this.idTableSelected = 6;

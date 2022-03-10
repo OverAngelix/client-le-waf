@@ -454,6 +454,9 @@
         <v-btn color="blue-grey" @click="bloque('17:15')" class="white--text">
           17:15
         </v-btn>
+        <!-- <v-btn color="blue-grey" @click="OrganiserReservation()" class="white--text">
+          PrintResa
+        </v-btn> -->
       </v-row>
     </div>
   </v-container>
@@ -798,6 +801,14 @@ export default {
       });
     },
 
+    async OrganiserReservation(){
+       let reservationsDTO = await ReservationsRepository.getReservationsDuJour({
+        //date: this.dateSelectionne + " 02:00:00.000",
+        date: this.dateSelectionne + " 00:00:00.000",
+      });
+        console.log(reservationsDTO)
+    },
+
     async newAutoReservation(idtable, heure) {
       await ReservationsRepository.addReservation({
         nom: "",
@@ -814,7 +825,7 @@ export default {
 
     async loadReservations() {
       let reservationsDTO = await ReservationsRepository.getReservationsDuJour({
-        //date: this.dateSelectionne + " 01:00:00.000",
+        //date: this.dateSelectionne + " 02:00:00.000",
         date: this.dateSelectionne + " 00:00:00.000",
       });
       for (let j = 0; j < this.reservations.length; j++) {

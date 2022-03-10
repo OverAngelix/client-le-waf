@@ -238,21 +238,18 @@
         <br />
 
         <v-divider width="50%"></v-divider>
-        <p><strong>Jo</strong>&lsquo;</p>
+        <p><strong>Loki</strong></p>
         <p>
-          Jo est un survivant, accompagné de son copain Engie, ils ont été
-          retrouvés accroché dans une forêt avec ses confrères. Son histoire se
-          poursuit avec la fourrière et la LPA, touché par leur histoire, nous
-          avons pris Engie et Jo&rsquo; en famille d&rsquo;accueil. Engie a
-          trouvé sa famille et revient en Garderie, quant à Jo&rsquo; il
-          séjourne au sein du Waf .. 🙂
+          Loki est un croisé Doberman que nous avons recueilli en Décembre 2021.
+          <br />Ce jeune petit père est un rescapé de la rue. <br />Au Waf vous
+          aurez surement le droit à une sieste et une lechouille de sa part ! 🙂
         </p>
         <v-img
           alt="Jo"
           contain
           max-height="470"
           max-width="350"
-          :src="require(`@/assets/Djo.jpg`)"
+          :src="require(`@/assets/Loki.jpg`)"
         ></v-img>
       </v-col>
     </v-row>
