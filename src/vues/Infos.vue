@@ -114,13 +114,12 @@
         </p>
         <p>
           Au Waf, on ne marche pas comme dans un salon de thé habituel, car nos
-          boissons sont sous forme de buffet à volonté à 7€ par personne : Café,
-          thés, sirops, chocolat chaud, smoothie du jour, soda du jour à
-          volonté!
+          boissons sont sous forme de buffet à volonté à 8€ par PERSONNE : Café,
+          thés, sirops, chocolat chaud, smoothie du jour et divers jus.
         </p>
         <p>
-          à noter que tout le monde doit consommer car le buffet est toujours
-          facturé!
+           À noter que le buffet est toujours facturé même si vous ne CONSOMMEZ PAS.
+           Il est compris dansn la formule d'entrée.
         </p>
         <v-img
           alt="MENU"
@@ -130,13 +129,6 @@
           :src="require(`@/assets/carte.jpg`)"
         ></v-img>
         <br />
-        <v-img
-          alt="trip"
-          contain
-          max-height="400"
-          max-width="400"
-          :src="require(`@/assets/trip.png`)"
-        ></v-img>
       </v-col>
     </v-row>
   </v-container>
