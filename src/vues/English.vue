@@ -31,7 +31,7 @@
           <strong>Awesome! So can I come for a coffee?</strong>
         </p>
         <p>
-          Absolutely! The way it works is there is a 7€ entry fee -it includes
+          Absolutely! The way it works is there is a 8€ entry fee -it includes
           unlimited tea, coffee and squash, a smoothie, hot chocolate and a
           soda. If you’re feeling greedy, we also sell cakes for 3
           extra euros. If you’re thinking of coming on a week-end or with a big
