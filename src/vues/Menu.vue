@@ -30,7 +30,7 @@
     </v-card>
 
     <v-footer dark padless>
-      <v-card flat tile color="#0D708F" class="flex white--text text-center">
+      <v-card flat tile color="basil" class="flex white--text text-center">
         <v-card-text>
           <v-btn
             href="https://www.facebook.com/lewaf/"
